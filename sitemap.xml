@@ -7,6 +7,37 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+   <url>
+    <loc>https://www.formatjson.com/user-agent</loc>
+    <lastmod>2025-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+   <url>
+    <loc>https://www.formatjson.com/uuid</loc>
+    <lastmod>2025-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+   <url>
+    <loc>https://www.formatjson.com/onfile</loc>
+    <lastmod>2025-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+   <url>
+    <loc>https://www.formatjson.com/base64</loc>
+    <lastmod>2025-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+   <url>
+    <loc>https://www.formatjson.com/xml</loc>
+    <lastmod>2025-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
 
   <url>
     <loc>https://www.formatjson.com/terms</loc>
@@ -24,6 +55,18 @@
 
   <url>
     <loc>https://www.formatjson.com/contact</loc>
+    <lastmod>2025-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+    <url>
+    <loc>https://www.formatjson.com/faq</loc>
+    <lastmod>2025-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+     <url>
+    <loc>https://www.formatjson.com/about</loc>
     <lastmod>2025-04-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
