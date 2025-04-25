@@ -1,1 +1,38 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wheel of Names</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🎡 Wheel of Names</h1>
+    <textarea id="nameList" placeholder="Enter one name per line"></textarea>
+    <div class="controls">
+      <button onclick="updateWheel()">🔄 Update</button>
+      <button onclick="shuffleNames()">🔀 Shuffle</button>
+      <button onclick="sortNames()">🔤 Sort</button>
+      <button onclick="spinWheel()">🎯 Spin</button>
+      <button onclick="saveNames()">💾 Save</button>
+      <button onclick="loadNames()">📂 Load</button>
+      <button onclick="exportHistory()">⬇️ Export History</button>
+      <button onclick="resetWheel()">♻️ Reset All</button>
+    </div>
+    <div class="color-controls">
+      <label>Segment Color: <input type="color" id="segColor" value="#007bff" onchange="updateWheel()" /></label>
+      <label>Text Color: <input type="color" id="textColor" value="#ffffff" onchange="updateWheel()" /></label>
+      <label><input type="checkbox" id="removeWinner" /> Remove winner after selection</label>
+    </div>
+    <canvas id="wheel" width="400" height="400"></canvas>
+    <div id="winner">🏆 Winner: <span id="winnerName">?</span></div>
+    <div id="history">
+      <h3>🏆 Winner History</h3>
+      <ul id="winnerHistory"></ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
