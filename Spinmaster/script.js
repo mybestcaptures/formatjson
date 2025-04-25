@@ -65,46 +65,46 @@ function shadeColor(color, percent) {
 function spinWheel() {
   if (spinning || names.length < 2) return;
 
-  const spins = 5 + Math.random() * 5;
+  const spins = 5 + Math.random() * 5; // More spins for excitement
   const finalAngle = angle + spins * 2 * Math.PI;
-  const spinTime = 4000;
+  const spinTime = 4000; // Spin duration (ms)
   const start = performance.now();
 
   spinning = true;
 
   function animate(now) {
     const elapsed = now - start;
-    const t = Math.min(elapsed / spinTime, 1);
-    const eased = easeOutQuart(t);
+    const t = Math.min(elapsed / spinTime, 1); // Time progress
+    const eased = easeOutQuart(t); // Apply easing for smoothness
 
-    angle = angle + (finalAngle - angle) * eased;
-    drawRotatedWheel();
+    angle = angle + (finalAngle - angle) * eased; // Rotate the wheel
+    drawRotatedWheel(); // Draw the wheel after each frame
 
     if (t < 1) {
-      requestAnimationFrame(animate);
+      requestAnimationFrame(animate); // Continue animating until completed
     } else {
       spinning = false;
-      angle = finalAngle;
-      const normalized = (2 * Math.PI - (angle % (2 * Math.PI))) % (2 * Math.PI);
-      const winnerIndex = Math.floor((normalized / (2 * Math.PI)) * names.length) % names.length;
+      angle = finalAngle; // Lock angle after completion
+      const normalized = (2 * Math.PI - (angle % (2 * Math.PI))) % (2 * Math.PI); // Normalize angle
+      const winnerIndex = Math.floor((normalized / (2 * Math.PI)) * names.length) % names.length; // Find winner
       const winner = names[winnerIndex];
       document.getElementById('winnerName').textContent = winner;
-      addToHistory(winner);
+      addToHistory(winner); // Add winner to history
 
       if (document.getElementById("removeWinner").checked) {
-        names.splice(winnerIndex, 1);
+        names.splice(winnerIndex, 1); // Remove winner from list if needed
         document.getElementById("nameList").value = names.join('\n');
       }
 
-      confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } });
+      confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } }); // Confetti effect on win
     }
   }
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animate); // Start the animation loop
 }
 
 function easeOutQuart(t) {
-  return 1 - (--t) * t * t * t;
+  return 1 - (--t) * t * t * t; // Easing function for smoothness
 }
 
 function addToHistory(name) {
