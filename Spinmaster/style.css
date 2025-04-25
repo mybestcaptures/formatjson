@@ -11,24 +11,25 @@ body {
 
 .container {
   display: flex;
-  max-width: 800px;
+  max-width: 1000px;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .options {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 25%;
+  width: 30%;
   padding: 1rem;
+  position: relative;
 }
 
 .wheel-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60%;
+  width: 50%;
   position: relative;
 }
 
@@ -75,7 +76,7 @@ canvas {
   margin-top: 10px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .container {
     flex-direction: column;
     align-items: center;

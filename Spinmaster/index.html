@@ -9,6 +9,9 @@
 </head>
 <body>
   <div class="container">
+    <div class="wheel-container">
+      <canvas id="wheel" width="400" height="400"></canvas>
+    </div>
     <div class="options">
       <textarea id="nameList" placeholder="Enter one name per line"></textarea>
       <div class="controls">
@@ -27,14 +30,11 @@
         <label><input type="checkbox" id="removeWinner" /> Remove winner after selection</label>
       </div>
     </div>
-    <div class="wheel-container">
-      <canvas id="wheel" width="400" height="400"></canvas>
-    </div>
-    <div id="winner">🏆 Winner: <span id="winnerName">?</span></div>
-    <div id="history">
-      <h3>🏆 Winner History</h3>
-      <ul id="winnerHistory"></ul>
-    </div>
+  </div>
+  <div id="winner">🏆 Winner: <span id="winnerName">?</span></div>
+  <div id="history">
+    <h3>🏆 Winner History</h3>
+    <ul id="winnerHistory"></ul>
   </div>
   <script src="script.js"></script>
 </body>
