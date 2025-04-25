@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wheel of Names</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f9f9f9;
+      padding: 30px;
+    }
+    textarea {
+      width: 100%;
+      max-width: 500px;
+      height: 100px;
+      margin: 10px auto;
+      font-size: 1rem;
+    }
+    canvas {
+      margin-top: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    #winner {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    input[type="color"] {
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎡 Wheel of Names</h1>
+
+  <textarea id="namesInput" placeholder="Enter names separated by commas or new lines"></textarea><br/>
+
+  <button onclick="shuffleNames()">🔀 Shuffle</button>
+  <button onclick="sortNames()">🔤 Sort A-Z</button>
+  <button onclick="updateWheel()">✅ Update Wheel</button>
+  <button onclick="spinWheel()">🎯 Spin</button><br/>
+
+  <label>Main Color: <input type="color" id="mainColor" value="#007bff" onchange="updateWheel()" /></label>
+  <label>Text Color: <input type="color" id="textColor" value="#ffffff" onchange="updateWheel()" /></label>
+
+  <canvas id="wheelCanvas" width="400" height="400"></canvas>
+  <div id="winner"></div>
+
+  <script>
+    let names = [];
+    let angle = 0;
+    let spinning = false;
+    const canvas = document.getElementById('wheelCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function parseNames() {
+      const input = document.getElementById('namesInput').value;
+      return input
+        .split(/[\n,]+/)
+        .map(name => name.trim())
+        .filter(name => name.length > 0);
+    }
+
+    function drawWheel(namesList) {
+      const mainColor = document.getElementById('mainColor').value;
+      const textColor = document.getElementById('textColor').value;
+      const num = namesList.length;
+      const radius = canvas.width / 2;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
+      ctx.translate(radius, radius);
+      for (let i = 0; i < num; i++) {
+        const startAngle = (i / num) * 2 * Math.PI;
+        const endAngle = ((i + 1) / num) * 2 * Math.PI;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.fillStyle = i % 2 === 0 ? mainColor : shadeColor(mainColor, -10);
+        ctx.arc(0, 0, radius, startAngle, endAngle);
+        ctx.fill();
+        ctx.save();
+        ctx.rotate(startAngle + (endAngle - startAngle) / 2);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = textColor;
+        ctx.font = '16px sans-serif';
+        ctx.fillText(namesList[i], radius - 10, 5);
+        ctx.restore();
+      }
+      ctx.restore();
+    }
+
+    function shadeColor(color, percent) {
+      const num = parseInt(color.slice(1), 16),
+            amt = Math.round(2.55 * percent),
+            R = (num >> 16) + amt,
+            G = (num >> 8 & 0x00FF) + amt,
+            B = (num & 0x0000FF) + amt;
+      return "#" + (
+        0x1000000 +
+        (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+        (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+        (B < 255 ? (B < 1 ? 0 : B) : 255)
+      ).toString(16).slice(1);
+    }
+
+    function updateWheel() {
+      names = parseNames();
+      if (names.length > 1) {
+        drawWheel(names);
+      }
+    }
+
+    function shuffleNames() {
+      names = parseNames();
+      for (let i = names.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [names[i], names[j]] = [names[j], names[i]];
+      }
+      document.getElementById('namesInput').value = names.join('\n');
+      drawWheel(names);
+    }
+
+    function sortNames() {
+      names = parseNames().sort((a, b) => a.localeCompare(b));
+      document.getElementById('namesInput').value = names.join('\n');
+      drawWheel(names);
+    }
+
+    function spinWheel() {
+      if (spinning || names.length < 2) return;
+      spinning = true;
+      const spins = Math.floor(Math.random() * 5) + 5;
+      const duration = 4000;
+      const finalAngle = angle + 2 * Math.PI * spins + Math.random() * 2 * Math.PI;
+      const start = performance.now();
+      requestAnimationFrame(function animate(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        angle = angle + (finalAngle - angle) * easeOut(progress);
+        drawRotatedWheel();
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          const index = Math.floor(((2 * Math.PI - (angle % (2 * Math.PI))) / (2 * Math.PI)) * names.length) % names.length;
+          document.getElementById('winner').textContent = `🎉 Winner: ${names[index]} 🎉`;
+          spinning = false;
+        }
+      });
+    }
+
+    function drawRotatedWheel() {
+      ctx.save();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate(angle);
+      ctx.translate(-canvas.width / 2, -canvas.height / 2);
+      drawWheel(names);
+      ctx.restore();
+    }
+
+    function easeOut(t) {
+      return (--t) * t * t + 1;
+    }
+  </script>
+
+</body>
+</html>
