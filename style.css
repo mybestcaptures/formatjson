@@ -15,6 +15,15 @@ h1 {
   padding-bottom: 4px;
 }
 
+header {
+  box-sizing: border-box;
+  padding: 16px;
+  font-size: 20px;
+  background-color: #1165ed;
+  color: white;
+  min-height: 60px;
+}
+
 .fullbleed-wrap {
   background-color: #1165ed;
 }
