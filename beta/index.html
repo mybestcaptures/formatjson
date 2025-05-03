@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Editor Tool - Format, Validate, Diff, and More</title>
+    <meta name="description" content="An online JSON editor tool to format, validate, view, edit, copy, download, and compare JSON data with diff highlighting and dark mode.">
+    <meta name="keywords" content="JSON editor, JSON formatter, JSON validator, JSON diff, compare JSON, online JSON tool, dark mode, code editor, web tool">
+    <meta name="author" content="Json Format"> <meta property="og:title" content="JSON Editor Tool - Format, Validate, Diff, and More">
+    <meta property="og:description" content="An online JSON editor tool to format, validate, view, edit, copy, download, and compare JSON data with diff highlighting and dark mode.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.formatjson.com/beta">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.2/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <style>
+        /* Dark Mode Variables */
+        :root {
+            --background-color: #1e1e1e;
+            --container-bg-color: #2d2d2d;
+            --text-color: #cccccc;
+            --border-color: #555555;
+            --box-shadow-color: rgba(0, 0, 0, 0.3);
+            --button-bg-color: #007bff;
+            --button-hover-bg-color: #0056b3;
+            --button-text-color: white;
+            --editor-bg-color: #252526; /* VS Code dark theme editor background */
+            --editor-border-color: #555556;
+            --menu-bg-color: #3c3c3c; /* VS Code dark theme menu background */
+            --menu-border-color: #555556;
+            --diff-added-bg: #1a472a; /* Darker green for dark mode */
+            --diff-added-text: #a2fca2;
+            --diff-removed-bg: #471a1a; /* Darker red for dark mode */
+            --diff-removed-text: #fca2a2;
+            --diff-changed-bg: #5a4d19; /* Darker yellow for dark mode */
+            --diff-changed-text: #fcfca2;
+            --diff-equal-text: #888888; /* Dimmer text for equal lines */
+             --line-number-color: #606060; /* Color for line numbers */
+             --ace-gutter-bg: #252526; /* Match editor background */
+             --ace-gutter-border: #555556; /* Match editor border */
+             --ace-gutter-text: #606060; /* Match line number color */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--container-bg-color);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--box-shadow-color);
+        }
+        h1, h2 {
+            color: var(--text-color);
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+        }
+        button {
+            padding: 12px 25px;
+            background-color: var(--button-bg-color);
+            color: var(--button-text-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+        }
+        button:hover {
+            background-color: var(--button-hover-bg-color);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+         .input-controls {
+             display: flex;
+             gap: 10px;
+             margin-bottom: 10px;
+             flex-wrap: wrap;
+             align-items: center; /* Vertically align items */
+         }
+         .input-controls button {
+             padding: 8px 15px; /* Smaller padding for input controls */
+             font-size: 0.9em;
+         }
+
+
+        .editor-container {
+             margin-top: 10px; /* Space above editors */
+             height: 300px; /* Default height for input editors */
+             border: 1px solid var(--editor-border-color);
+             border-radius: 8px;
+             overflow: hidden; /* Ensure border radius is applied */
+        }
+
+
+        #singleOutputEditor {
+            margin-top: 20px;
+            height: 500px; /* Set a height for the main output editor */
+            border: 1px solid var(--editor-border-color);
+            border-radius: 8px;
+            overflow: hidden; /* Ensure border radius is applied */
+        }
+         #diffOutputContainer {
+             margin-top: 20px;
+             display: flex; /* Use flexbox for side-by-side */
+             gap: 20px;
+             height: 500px; /* Set a height for the diff editors */
+         }
+         #diffOutputEditor1, #diffOutputEditor2 {
+             flex: 1; /* Distribute space equally */
+             border: 1px solid var(--editor-border-color);
+             border-radius: 8px;
+             overflow: auto; /* Add scrollbars if content overflows */
+             padding: 10px; /* Add padding inside diff panes */
+             white-space: pre-wrap; /* Preserve whitespace and wrap text */
+             word-wrap: break-word; /* Break long words */
+             font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+             font-size: 0.9em;
+             line-height: 1.5;
+             background-color: var(--editor-bg-color); /* Editor background for diff panes */
+             color: var(--text-color);
+         }
+
+         .jsoneditor-vue { /* Specific class used by the library */
+             border-radius: 8样的 /* Apply border radius to the editor itself */
+         }
+         /* Adjust jsoneditor styles for better integration and dark mode */
+         .jsoneditor {
+             border: none !important; /* Remove default border */
+             background-color: var(--editor-bg-color); /* Editor background */
+             color: var(--text-color);
+         }
+         .jsoneditor-menu {
+             border-bottom: 1px solid var(--menu-border-color); /* Add a subtle separator */
+             background-color: var(--menu-bg-color); /* Match output area background */
+             color: var(--text-color);
+         }
+         .jsoneditor-tree, .jsoneditor-code, .jsoneditor-text {
+             padding: 10px; /* Add some internal padding */
+             background-color: var(--editor-bg-color); /* Editor background */
+             color: var(--text-color);
+         }
+         /* jsoneditor specific dark mode overrides */
+         .jsoneditor-tree div.jsoneditor-field,
+         .jsoneditor-tree div.jsoneditor-value,
+         .jsoneditor-tree div.jsoneditor-readonly {
+             color: var(--text-color) !important;
+         }
+         .jsoneditor-tree .jsoneditor-string { color: var(--diff-added-text) !important; } /* Example: green for strings */
+         .jsoneditor-tree .jsoneditor-number { color: var(--diff-changed-text) !important; } /* Example: yellow for numbers */
+         .jsoneditor-tree .jsoneditor-boolean { color: var(--diff-removed-text) !important; } /* Example: red for booleans */
+         .jsoneditor-tree .jsoneditor-null { color: var(--line-number-color) !important; } /* Example: gray for null */
+         .jsoneditor-tree .jsoneditor-field { color: var(--text-color) !important; } /* Default text color for keys */
+
+         .jsoneditor-tree .jsoneditor-selected {
+             background-color: rgba(0, 123, 255, 0.3) !important; /* Highlight selected item */
+         }
+          .jsoneditor-tree .jsoneditor-field.jsoneditor-highlight,
+          .jsoneditor-tree .jsoneditor-value.jsoneditor-highlight {
+              background-color: rgba(255, 255, 0, 0.3) !important; /* Highlight search results */
+          }
+
+         /* Ace editor gutter dark mode styles */
+         .ace_editor .ace_gutter {
+             background: var(--ace-gutter-bg) !important;
+             color: var(--ace-gutter-text) !important;
+             border-right: 1px solid var(--ace-gutter-border) !important;
+         }
+         .ace_editor .ace_gutter-cell {
+             color: var(--ace-gutter-text) !important;
+         }
+         .ace_editor .ace_gutter-active-line {
+             background-color: rgba(100, 100, 100, 0.3) !important; /* Highlight active line number */
+         }
+
+
+        .input-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-direction: column; /* Stack editors on small screens */
+        }
+        @media (min-width: 768px) {
+            .input-section {
+                flex-direction: row; /* Side-by-side on larger screens */
+            }
+            .input-section > div {
+                flex: 1; /* Distribute space equally */
+            }
+        }
+
+        /* Styles for diff highlighting */
+        .diff-added {
+            background-color: var(--diff-added-bg);
+            color: var(--diff-added-text);
+        }
+        .diff-removed {
+            background-color: var(--diff-removed-bg);
+            color: var(--diff-removed-text);
+            text-decoration: line-through; /* Indicate removal */
+        }
+         .diff-changed {
+            background-color: var(--diff-changed-bg);
+            color: var(--diff-changed-text);
+        }
+         .diff-equal {
+             color: var(--diff-equal-text); /* Dimmer text for equal lines */
+         }
+         .line-number {
+             color: var(--line-number-color);
+             margin-right: 10px;
+             user-select: none; /* Prevent selecting line numbers */
+             display: inline-block;
+             width: 30px; /* Adjust width as needed for line numbers */
+             text-align: right;
+         }
+         #diffOutputEditor1 pre, #diffOutputEditor2 pre {
+             margin: 0; /* Remove default pre margin */
+         }
+
+         /* CSS to hide "powered by Ace" attribution */
+         /* This targets the last div within the Ace editor which often contains the attribution */
+         /* Applying to all ace_editor instances */
+         .ace_editor > div:last-child {
+             display: none !important;
+         }
+         /* More specific selectors targeting the attribution within input editor containers */
+         #jsonInputEditor1 .ace_editor > div:last-child,
+         #jsonInputEditor2 .ace_editor > div:last-child {
+             display: none !important;
+         }
+
+
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "JSON Editor Tool",
+      "url": "https://www.formatjson.com/beta",
+      "description": "An online tool to format, validate, view, edit, copy, download, and compare JSON data with diff highlighting and dark mode.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript and HTML5 support."
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-2xl font-bold text-center mb-6">Json editor tool</h1>
+
+        <div class="input-section">
+            <div>
+                <h2 class="text-xl font-semibold mb-3">JSON Input 1</h2>
+                <div class="input-controls">
+                    <button id="importBtn1">Import JSON 1</button>
+                    <input type="file" id="importFile1" accept=".json" class="hidden">
+                    <button id="copyBtn1">Copy JSON 1</button>
+                    <button id="downloadBtn1">Download JSON 1</button>
+                </div>
+                <div id="jsonInputEditor1" class="editor-container"></div>
+            </div>
+            <div>
+                <h2 class="text-xl font-semibold mb-3">JSON Input 2 (for comparison)</h2>
+                 <div class="input-controls">
+                    <button id="importBtn2">Import JSON 2</button>
+                    <input type="file" id="importFile2" accept=".json" class="hidden">
+                    <button id="copyBtn2">Copy JSON 2</button>
+                    <button id="downloadBtn2">Download JSON 2</button>
+                </div>
+                <div id="jsonInputEditor2" class="editor-container"></div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="viewBtn1">View JSON 1 in Output</button>
+            <button id="compareBtn">Compare JSONs (Input 1 vs Input 2)</button>
+        </div>
+
+        <h2 class="text-xl font-semibold mb-3">Output / Diff View</h2>
+        <div id="singleOutputEditor"></div>
+        <div id="diffOutputContainer" style="display: none;">
+            <div id="diffOutputEditor1"></div>
+            <div id="diffOutputEditor2"></div>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.2/jsoneditor.min.js"></script>
+    <script>
+        const inputEditorContainer1 = document.getElementById('jsonInputEditor1');
+        const inputEditorContainer2 = document.getElementById('jsonInputEditor2');
+        const singleOutputEditorContainer = document.getElementById('singleOutputEditor');
+        const diffOutputContainer = document.getElementById('diffOutputContainer');
+        const diffOutputEditorContainer1 = document.getElementById('diffOutputEditor1');
+        const diffOutputEditorContainer2 = document.getElementById('diffOutputEditor2');
+
+        const viewBtn1 = document.getElementById('viewBtn1');
+        const compareBtn = document.getElementById('compareBtn');
+
+        // Input 1 controls
+        const importBtn1 = document.getElementById('importBtn1');
+        const importFile1 = document.getElementById('importFile1');
+        const copyBtn1 = document.getElementById('copyBtn1');
+        const downloadBtn1 = document.getElementById('downloadBtn1');
+
+
+        // Input 2 controls
+        const importBtn2 = document.getElementById('importBtn2');
+        const importFile2 = document.getElementById('importFile2');
+        const copyBtn2 = document.getElementById('copyBtn2');
+        const downloadBtn2 = document.getElementById('downloadBtn2');
+
+
+        let inputEditor1 = null; // Variable to hold the first input jsoneditor instance
+        let inputEditor2 = null; // Variable to hold the second input jsoneditor instance
+        let singleOutputEditor = null; // Variable for the single output editor
+
+
+        // Options for the input editors (defaulting to code mode, with all views)
+        const inputEditorOptions = {
+            mode: 'code', // Set default mode to code
+            modes: ['tree', 'code', 'text', 'form', 'view', 'preview'], // Include all available modes
+             onError: function (err) {
+                 console.error("Input Editor Error:", err);
+                 alert('Input Editor Error: ' + err.toString());
+             },
+        };
+
+        // Options for the single output editor
+        const singleOutputEditorOptions = {
+             modes: ['tree', 'code', 'text', 'form', 'view', 'preview'],
+             onError: function (err) {
+                 console.error("Single Output Editor Error:", err);
+                 alert('Single Output Editor Error: ' + err.toString());
+             },
+             onModeChange: function (newMode) {
+                 console.log('Single Output Editor Mode changed to', newMode);
+             }
+        };
+
+
+        // Initialize input editors on load
+        inputEditor1 = new JSONEditor(inputEditorContainer1, inputEditorOptions, {});
+        inputEditor2 = new JSONEditor(inputEditorContainer2, inputEditorOptions, {});
+
+        // Initialize single output editor on load (initially visible)
+        singleOutputEditor = new JSONEditor(singleOutputEditorContainer, singleOutputEditorOptions, {});
+        singleOutputEditor.setMode('tree'); // Default mode for single output
+
+        // Function to perform a simple line-by-line diff and generate HTML with line numbers
+        function generateLineDiffHtml(text1, text2) {
+            const lines1 = text1.split('\n');
+            const lines2 = text2.split('\n');
+            const maxLength = Math.max(lines1.length, lines2.length);
+
+            let html1 = '';
+            let html2 = '';
+
+            for (let i = 0; i < maxLength; i++) {
+                const line1 = lines1[i] !== undefined ? lines1[i] : '';
+                const line2 = lines2[i] !== undefined ? lines2[i] : '';
+                const lineNumber = i + 1;
+
+                const lineNumberSpan = `<span class="line-number">${lineNumber}</span>`;
+
+                if (line1 === line2) {
+                    // Lines are identical
+                    html1 += `${lineNumberSpan}<span class="diff-equal">${escapeHtml(line1)}</span>\n`;
+                    html2 += `${lineNumberSpan}<span class="diff-equal">${escapeHtml(line2)}</span>\n`;
+                } else {
+                    // Lines are different
+                    let lineDiff1 = escapeHtml(line1);
+                    let lineDiff2 = escapeHtml(line2);
+
+                    if (line1 !== '' && line2 !== '') {
+                         // Both lines exist but are different (changed)
+                         html1 += `${lineNumberSpan}<span class="diff-changed">${lineDiff1}</span>\n`;
+                         html2 += `${lineNumberSpan}<span class="diff-changed">${lineDiff2}</span>\n`;
+                    } else if (line1 !== '') {
+                        // Line only in text1 (removed)
+                        html1 += `${lineNumberSpan}<span class="diff-removed">${lineDiff1}</span>\n`;
+                        html2 += `${lineNumberSpan}<span class="diff-added"></span>\n`; // Placeholder for alignment
+                    } else if (line2 !== '') {
+                        // Line only in text2 (added)
+                        html1 += `${lineNumberSpan}<span class="diff-removed"></span>\n`; // Placeholder for alignment
+                        html2 += `${lineNumberSpan}<span class="diff-added">${lineDiff2}</span>\n`;
+                    } else {
+                         // Should not happen with maxLength logic, but as a fallback
+                         html1 += `${lineNumberSpan}\n`;
+                         html2 += `${lineNumberSpan}\n`;
+                    }
+                }
+            }
+
+            return { html1, html2 };
+        }
+
+         // Helper function to escape HTML entities
+        function escapeHtml(unsafe) {
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        // Function to copy text to clipboard
+        async function copyTextToClipboard(text) {
+            try {
+                // Try the modern Clipboard API first
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    alert('JSON copied to clipboard!');
+                    return; // Exit if successful
+                }
+
+                // Fallback: Use a temporary textarea
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+
+                // Avoid scrolling to bottom
+                textArea.style.top = "0";
+                textArea.style.left = "0";
+                textArea.style.position = "fixed";
+                textArea.style.opacity = "0"; // Make it invisible
+
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    const successful = document.execCommand('copy');
+                    const msg = successful ? 'JSON copied to clipboard (fallback).' : 'Failed to copy JSON (fallback).';
+                    alert(msg);
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                    alert('Copying JSON failed. Please copy manually.');
+                }
+
+                document.body.removeChild(textArea);
+
+            } catch (err) {
+                console.error('Failed to copy JSON:', err);
+                alert('An error occurred while trying to copy JSON.');
+            }
+        }
+
+        // Function to download text as a file
+        function downloadTextAsFile(text, filename) {
+            const blob = new Blob([text], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url); // Clean up the URL object
+        }
+
+
+        // Event listener for View JSON 1 in Output button
+        viewBtn1.addEventListener('click', () => {
+            try {
+                const json = inputEditor1.get(); // Get JSON from the first input editor
+
+                // Hide diff view, show single output view
+                diffOutputContainer.style.display = 'none';
+                singleOutputEditorContainer.style.display = 'block';
+
+                // Update single output editor
+                singleOutputEditor.setMode('tree'); // Set mode to tree
+                singleOutputEditor.set(json); // Set the JSON data
+
+
+            } catch (error) {
+                alert('Error getting JSON from Input 1: ' + error.message);
+                 // Optionally clear the output editor or show an error in it
+                 singleOutputEditor.set({}); // Clear output editor
+                 singleOutputEditor.setMode('tree');
+            }
+        });
+
+        // Event listener for Compare button
+        compareBtn.addEventListener('click', () => {
+            try {
+                const json1 = inputEditor1.get(); // Get JSON from the first input editor
+                const json2 = inputEditor2.get(); // Get JSON from the second input editor
+
+                // Format JSONs to strings for comparison
+                const formattedJson1 = JSON.stringify(json1, null, 4);
+                const formattedJson2 = JSON.stringify(json2, null, 4);
+
+                // Generate diff HTML
+                const diffHtml = generateLineDiffHtml(formattedJson1, formattedJson2);
+
+                // Hide single output view, show diff view
+                singleOutputEditorContainer.style.display = 'none';
+                diffOutputContainer.style.display = 'flex'; // Use flex to show side-by-side
+
+                // Display diff HTML in the diff panes
+                diffOutputEditorContainer1.innerHTML = `<pre>${diffHtml.html1}</pre>`;
+                diffOutputEditorContainer2.innerHTML = `<pre>${diffHtml.html2}</pre>`;
+
+
+            } catch (error) {
+                alert('Error getting or comparing JSON: ' + error.message);
+                 // Hide diff view, show single output view with error
+                 diffOutputContainer.style.display = 'none';
+                 singleOutputEditorContainer.style.display = 'block';
+
+                 // Update single output editor with error message
+                 singleOutputEditor.set({});
+                 singleOutputEditor.setMode('text');
+                 singleOutputEditor.setText('Error getting or comparing JSON: ' + error.message);
+            }
+        });
+
+        // Event listeners for Input 1 controls
+        importBtn1.addEventListener('click', () => {
+            importFile1.click(); // Trigger the hidden file input
+        });
+
+        importFile1.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const json = JSON.parse(e.target.result);
+                        inputEditor1.set(json); // Set the JSON in the editor
+                        alert('JSON imported successfully into Input 1.');
+                    } catch (error) {
+                        alert('Error parsing JSON from file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        copyBtn1.addEventListener('click', () => {
+            try {
+                const json = inputEditor1.get();
+                const formattedJson = JSON.stringify(json, null, 4); // Get formatted JSON string
+                copyTextToClipboard(formattedJson);
+            } catch (error) {
+                alert('Error getting JSON from Input 1 to copy: ' + error.message);
+            }
+        });
+
+        downloadBtn1.addEventListener('click', () => {
+            try {
+                const json = inputEditor1.get();
+                const formattedJson = JSON.stringify(json, null, 4); // Get formatted JSON string
+                downloadTextAsFile(formattedJson, 'input1.json');
+            } catch (error) {
+                alert('Error getting JSON from Input 1 to download: ' + error.message);
+            }
+        });
+
+
+        // Event listeners for Input 2 controls
+        importBtn2.addEventListener('click', () => {
+            importFile2.click(); // Trigger the hidden file input
+        });
+
+        importFile2.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const json = JSON.parse(e.target.result);
+                        inputEditor2.set(json); // Set the JSON in the editor
+                        alert('JSON imported successfully into Input 2.');
+                    } catch (error) {
+                        alert('Error parsing JSON from file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        copyBtn2.addEventListener('click', () => {
+            try {
+                const json = inputEditor2.get();
+                const formattedJson = JSON.stringify(json, null, 4); // Get formatted JSON string
+                copyTextToClipboard(formattedJson);
+            } catch (error) {
+                alert('Error getting JSON from Input 2 to copy: ' + error.message);
+            }
+        });
+
+        downloadBtn2.addEventListener('click', () => {
+            try {
+                const json = inputEditor2.get();
+                const formattedJson = JSON.stringify(json, null, 4); // Get formatted JSON string
+                downloadTextAsFile(formattedJson, 'input2.json');
+            } catch (error) {
+                alert('Error getting JSON from Input 2 to download: ' + error.message);
+            }
+        });
+
+
+         // Basic alert replacement
+         function alert(message) {
+             const alertBox = document.createElement('div');
+             alertBox.style.cssText = `
+                 position: fixed;
+                 top: 20px;
+                 left: 50%;
+                 transform: translateX(-50%);
+                 background-color: #f8d7da;
+                 color: #721c24;
+                 padding: 15px;
+                 border-radius: 8px;
+                 border: 1px solid #f5c6cb;
+                 z-index: 1000;
+                 box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                 font-family: 'Inter', sans-serif;
+             `;
+             alertBox.textContent = message;
+             document.body.appendChild(alertBox);
+             setTimeout(() => {
+                 document.body.removeChild(alertBox);
+             }, 5000); // Remove after 5 seconds
+         }
+
+    </script>
+</body>
+   <footer align="center">
+    
+      <a href="/">Format JSON</a> | <a href="/onefile">Format One JSON</a> | <a href="/xml.html">Format XML</a> | <a href="/user-agent">User-Agent-Parser </a>  | <a href="/base64">Base 64 Decode</a>
+   
+  </footer>
+</html>
