@@ -77,5 +77,10 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-
+  <url>
+    <loc>https://www.formatjson.com/beta</loc>
+    <lastmod>2025-05-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>1.0</priority>
+  </url>
 </urlset>
