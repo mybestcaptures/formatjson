@@ -3,350 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free IP Address Lookup Tool - Check IP Location, ISP & More | YourBrandName</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Instantly check any IP address to find its geographical location, ISP, hostname, ASN, and other crucial network details. Our free, fast, and accurate IP lookup tool is user-friendly and secure.">
-    <meta name="keywords" content="ip address lookup, what is my ip, check ip address, ip location, find ip address, ip checker, geoip, isp lookup, hostname lookup, ip tools, network tools, ip details, free ip lookup">
-    <meta name="author" content="FormatJson:Ip Address Lookup">
-    <meta name="robots" content="index, follow">
+    <title>Free IP Lookup Tool - Location, ISP, ASN & More | FormatJSON</title>
+    <meta name="description" content="Instantly find the geographical location, ISP, hostname, ASN, and crucial network details for any IP address with our free, fast, and accurate IP lookup tool. User-friendly and secure.">
+    <meta name="keywords" content="ip lookup, ip address lookup, find ip location, ip checker, ip geolocation, isp lookup, hostname lookup, asn lookup, what is my ip, ip address details, network tool, formatjson">
+    <link rel="canonical" href="https://formatjson.com/iplookup">
 
-    <!-- Open Graph / Facebook Meta Tags -->
-    <meta property="og:title" content="Free IP Address Lookup Tool - Check IP Location & Details | YourBrandName">
-    <meta property="og:description" content="Use our free tool to get detailed information about any IP address, including location, ISP, and hostname. Fast, accurate, and easy to use.">
+    <!-- Open Graph Meta Tags (for social sharing) -->
+    <meta property="og:title" content="Free IP Lookup Tool - Location, ISP, ASN | FormatJSON">
+    <meta property="og:description" content="Discover detailed information about any IP address: location, ISP, hostname, ASN, and more with our free online tool.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.formatjson.com/iplookup">
-    <meta property="og:image" content="https://www.formatjson.com/iplookup/assets/images/og-image-ip-lookup.png"> <!-- Update this path -->
-    <meta property="og:site_name" content="FormatJson:Ip Address Lookup">
+    <meta property="og:url" content="https://formatjson.com/iplookup">
+    <meta property="og:image" content="https://formatjson.com/path-to-your-promo-image.png">  <!-- Create and upload a promotional image -->
+    <meta property="og:site_name" content="FormatJSON.com">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Free IP Address Lookup Tool - YourBrandName">
-    <meta name="twitter:description" content="Quickly find IP address details: location, ISP, hostname, and more with our free and responsive IP lookup tool.">
-    <meta name="twitter:image" content="https://www.formatjson.com/assets/images/twitter-card-ip-lookup.png"> <!-- Update this path -->
+    <meta name="twitter:title" content="Free IP Lookup Tool - Location, ISP, ASN | FormatJSON">
+    <meta name="twitter:description" content="Our fast & accurate IP lookup tool provides geo-location, ISP, hostname, and network details for any IP.">
+    <meta name="twitter:image" content="https://formatjson.com/path-to-your-promo-image.png"> <!-- Use the same image -->
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> <!-- Create a favicon.ico -->
+    <!-- External CSS and Libraries -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <link rel="stylesheet" href="style.css">
 
-    <!-- Structured Data (Schema.org) -->
+    <!-- Schema.org Markup for Rich Snippets (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Free IP Address Lookup Tool - Check IP Location, ISP & More",
-      "description": "Instantly check any IP address to find its geographical location, ISP, hostname, ASN, and other crucial network details. Our free, fast, and accurate IP lookup tool is user-friendly and secure.",
-      "url": "https://www.formatjson.com/iplookup", // Update this URL
+      "@type": "WebSite",
+      "name": "FormatJSON IP Lookup Tool",
+      "url": "https://formatjson.com/iplookup",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://formatjson.com/iplookup?ip={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "description": "Free online tool to lookup IP address details including geolocation, ISP, hostname, ASN, and more.",
       "mainEntity": {
         "@type": "SoftwareApplication",
         "name": "IP Address Lookup Tool",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "Web (Cross-platform)",
+        "applicationCategory": "Utilities",
+        "operatingSystem": "Any (Web-based)",
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD"
         },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "512",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "keywords": "ip address lookup, ip checker, geoip, find ip location, isp lookup, network utility",
-        "browserRequirements": "Requires JavaScript and modern browser."
-      },
-      "speakable": {
-        "@type": "SpeakableSpecification",
-        "xpath": [
-          "/html/head/title",
-          "/html/head/meta[@name='description']/@content"
-        ]
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is an IP address?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "An Internet Protocol (IP) address is a numerical label assigned to each device (e.g., computer, printer) participating in a computer network that uses the Internet Protocol for communication. It's like a digital address for your device online."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How can this tool help me?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our IP lookup tool can help you identify the geographical location of an IP address, find out the Internet Service Provider (ISP), and understand network routing details like ASN."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is IP geolocation 100% accurate?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "IP geolocation is generally accurate at the country level and often at the city level. However, it typically cannot pinpoint an exact street address. Accuracy depends on the database used."
-          }
-        },
-        {
-            "@type": "Question",
-            "name": "Can I find someone's exact location using an IP address?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No, an IP address generally does not reveal an exact physical address. It provides an approximate location, often at the city or ISP level."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Is it legal to look up an IP address?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, looking up publicly available information associated with an IP address is legal. IP addresses are public records."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "What's the difference between IPv4 and IPv6?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "IPv4 uses a 32-bit address. IPv6 uses a 128-bit address scheme, providing a vastly larger address space. Our tool supports both."
-            }
+        "provider": {
+          "@type": "Organization",
+          "name": "FormatJSON.com"
         }
-      ]
+      }
     }
     </script>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>IP Address Lookup Tool</h1>
+            <p class="subtitle">Instantly check any IP address for its geographical location, ISP, hostname, ASN, and other crucial network details. Our free, fast, and accurate IP lookup tool is user-friendly and secure.</p>
+        </header>
 
-    <header>
-        <div class="container nav-container">
-            <a href="/" class="logo-link" aria-label="YourBrandName Homepage">
-                <img src="assets/images/logo-yourbrandname.svg" alt="YourBrandName Logo" class="logo-img">
-                <span class="logo-text">FormatJson:IP Address Lookup</span>
-            </a>
-            <nav aria-label="Main navigation">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/ip-lookup-tool" class="active">IP Lookup</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                </ul>
-            </nav>
-            <!-- <button id="themeToggleButton" aria-label="Toggle dark mode">🌙</button> -->
+        <section aria-labelledby="lookup-form-heading">
+            <h2 id="lookup-form-heading" class="visually-hidden">IP Lookup Form</h2>
+            <div class="input-group">
+                <input type="text" id="ipInput" placeholder="Enter IP Address (e.g., 8.8.8.8)" aria-label="IP Address Input">
+                <button id="lookupBtn" class="btn btn-primary">Lookup IP</button>
+            </div>
+            <div class="input-group">
+                <button id="myIpBtn" class="btn btn-secondary">Lookup My IP</button>
+            </div>
+        </section>
+
+        <section id="historyContainer" aria-labelledby="history-heading" style="display: none;">
+            <h3 id="history-heading">Lookup History</h3>
+            <ul id="historyList"></ul>
+            <button id="clearHistoryBtn" class="btn btn-secondary btn-small">Clear History</button>
+        </section>
+
+        <div id="loader" class="loader" role="status" aria-live="polite">
+            <span class="visually-hidden">Loading...</span>
         </div>
-    </header>
 
-    <main>
-        <section class="hero-section">
-            <div class="container">
-                <h1>Ultimate Free IP Address Lookup Tool</h1>
-                <p class="subheadline">Instantly discover geolocation, ISP, hostname, and comprehensive details for any IPv4 or IPv6 address. Fast, accurate, and completely free.</p>
-                <a href="#ipLookupForm" class="cta-button">Lookup IP Now</a>
+        <section id="resultsContainer" class="results" aria-labelledby="results-heading" style="display: none;">
+            <h2 id="results-heading" class="results-header">IP Information</h2>
+            <div id="resultsBody" class="results-body">
+                <!-- Results will be injected here by JavaScript -->
             </div>
         </section>
-
-        <section class="input-section" id="ipLookupForm">
-            <div class="container">
-                <h2>Enter IP Address for Detailed Information</h2>
-                <form id="ipAddressForm" aria-labelledby="form-title">
-                    <label for="ipAddressInput" class="sr-only">IP Address:</label>
-                    <input type="text" id="ipAddressInput" placeholder="e.g., 8.8.8.8 or 2001:4860:4860::8888" aria-label="IP Address Input" required>
-                    <div class="button-group">
-                        <button type="submit" id="lookupButton">Get IP Details</button>
-                        <button type="button" id="detectMyIpButton">Find My IP Address</button>
-                    </div>
-                </form>
-            </div>
+        
+        <section id="map-container" aria-labelledby="map-heading" style="display:none;">
+            <h2 id="map-heading" class="visually-hidden">IP Location Map</h2>
+            <div id="mapid"></div>
         </section>
 
-        <section class="results-section" id="resultsSection" aria-live="polite">
-            <div class="container">
-                <h2>IP Address Details</h2>
-                <div id="loadingIndicator" class="loading-indicator" style="display: none;">
-                    <div class="spinner"></div>
-                    Fetching IP information...
-                </div>
-                <div id="errorMessage" class="error-message" style="display: none;"></div>
-                <div id="ipResultsOutput">
-                    <p class="placeholder-text">Enter an IP address above to see its details.</p>
-                </div>
-                <div id="mapContainer">
-                    <div id="map" aria-label="Map showing IP address location">Map will display here (approximate location).</div>
-                </div>
-            </div>
-        </section>
+        <article class="content-section" aria-labelledby="what-is-ip-lookup">
+            <h2 id="what-is-ip-lookup">What is an IP Lookup?</h2>
+            <p>An IP lookup, also known as IP address lookup or IP geolocation, is the process of determining the physical location and other network-specific details associated with an IP address. Every device connected to the internet has a unique IP address, which can be used to identify its approximate geographical location, Internet Service Provider (ISP), hostname, and Autonomous System Number (ASN).</p>
+            <p>Our tool queries the <a href="https://ipinfo.io/" target="_blank" rel="noopener noreferrer">ipinfo.io</a> database to provide you with comprehensive details for any IPv4 or IPv6 address.</p>
+        </article>
 
-        <section class="features-section" id="features">
-            <div class="container">
-                <h2>Why Choose Our IP Lookup Service?</h2>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <span class="feature-icon">⚡</span>
-                        <h3>Blazing Fast Results</h3>
-                        <p>Get IP details in milliseconds. Our optimized system ensures quick responses.</p>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🎯</span>
-                        <h3>Highly Accurate Data</h3>
-                        <p>We use reliable geolocation databases for precise IP information.</p>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">Comprehensive Information</span>
-                        <h3>Comprehensive Info</h3>
-                        <p>From location to ISP, ASN, and hostname, we cover essential data points.</p>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🎨</span>
-                        <h3>User-Friendly Interface</h3>
-                        <p>Clean, intuitive design makes it easy for anyone to look up IP addresses.</p>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🛡️</span>
-                        <h3>Secure and Private</h3>
-                        <p>Your lookups are anonymous. We respect your privacy.</p>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">📱</span>
-                        <h3>Fully Responsive</h3>
-                        <p>Access our tool seamlessly on any device – desktop, tablet, or mobile.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <article class="content-section" aria-labelledby="tool-features">
+            <h2 id="tool-features">Key Features of Our IP Lookup Tool</h2>
+            <ul>
+                <li><strong>Geographical Location:</strong> Find the city, region, country, and postal code associated with an IP.</li>
+                <li><strong>ISP and Organization:</strong> Identify the Internet Service Provider and the organization that owns the IP address.</li>
+                <li><strong>Hostname:</strong> Discover the hostname linked to the IP, if available.</li>
+                <li><strong>ASN Details:</strong> Get information about the Autonomous System Number, including its name, domain, route, and type.</li>
+                <li><strong>Latitude and Longitude:</strong> Pinpoint the approximate coordinates, visualized on an interactive map.</li>
+                <li><strong>Timezone:</strong> See the local timezone of the IP address.</li>
+                <li><strong>"My IP" Lookup:</strong> Quickly find details about your own public IP address.</li>
+                <li><strong>Lookup History:</strong> Conveniently access your recent IP lookups.</li>
+                <li><strong>Free and Fast:</strong> Get instant results without any cost.</li>
+                <li><strong>User-Friendly Interface:</strong> Clean, modern, and responsive design for easy use on any device.</li>
+                <li><strong>Secure:</strong> All API communications are done over HTTPS.</li>
+            </ul>
+        </article>
 
-        <section class="educational-content-section">
-            <div class="container">
-                <h2>Understanding IP Addresses</h2>
-                <p>An IP (Internet Protocol) address is a unique numerical identifier assigned to every device connected to a network using the Internet Protocol for communication. It serves two main functions: host or network interface identification and location addressing. Learn more about <a href="/blog/ipv4-vs-ipv6">IPv4 vs IPv6</a> and how they shape the internet.</p>
-                <ul>
-                    <li><strong>Network Identification:</strong> Helps differentiate devices on a network.</li>
-                    <li><strong>Location Addressing:</strong> Routes data packets to the correct destination.</li>
-                    <li><strong>Types:</strong> Public vs. Private, Static vs. Dynamic.</li>
-                </ul>
-                <p>Explore our <a href="/blog" class="text-link">blog</a> for more in-depth articles on IP addresses and network security.</p>
-            </div>
-        </section>
+        <article class="content-section" aria-labelledby="how-to-use">
+            <h2 id="how-to-use">How to Use This IP Lookup Tool</h2>
+            <ol>
+                <li><strong>Enter an IP Address:</strong> Type or paste the IP address you want to investigate into the input field (e.g., "8.8.8.8").</li>
+                <li><strong>Click "Lookup IP":</strong> Press the button or hit Enter to initiate the search.</li>
+                <li><strong>Use "Lookup My IP":</strong> Alternatively, click this button to automatically fetch information for your current public IP address.</li>
+                <li><strong>View Results:</strong> The tool will display detailed information, including geolocation, ISP, ASN, and a map pinpointing the location.</li>
+                <li><strong>Check History:</strong> Your recent lookups are saved for quick access. You can click on a history item to re-run the lookup.</li>
+            </ol>
+        </article>
+        
+        <article class="content-section" aria-labelledby="faq">
+            <h2 id="faq">Frequently Asked Questions (FAQ)</h2>
+            <dl>
+                <dt>Is this IP lookup tool free?</dt>
+                <dd>Yes, our IP lookup tool is completely free to use.</dd>
+                <dt>How accurate is the IP geolocation?</dt>
+                <dd>IP geolocation provides an approximate location, typically accurate at the city level. It is not precise enough to identify a specific street address due to the nature of IP address allocation.</dd>
+                <dt>Can I look up IPv6 addresses?</dt>
+                <dd>Yes, our tool supports both IPv4 and IPv6 address lookups.</dd>
+                <dt>What data source do you use?</dt>
+                <dd>We utilize the robust and reliable API from <a href="https://ipinfo.io/" target="_blank" rel="noopener noreferrer">ipinfo.io</a> to fetch IP address details.</dd>
+                 <dt>Is my search private?</dt>
+                <dd>We value your privacy. The IP addresses you look up are sent to ipinfo.io for processing. We do not store your lookup queries on our servers beyond the local browser history feature, which you can clear.</dd>
+            </dl>
+        </article>
 
-        <section class="faq-section" id="faq">
-            <div class="container">
-                <h2>Frequently Asked Questions (FAQ)</h2>
-                <details class="faq-item">
-                    <summary>What is an IP address?</summary>
-                    <p>An Internet Protocol (IP) address is a numerical label assigned to each device (e.g., computer, printer) participating in a computer network that uses the Internet Protocol for communication. It's like a digital address for your device online.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>How can this tool help me?</summary>
-                    <p>Our IP lookup tool can help you identify the geographical location of an IP address, find out the Internet Service Provider (ISP), check for proxy or VPN usage (in some cases), and understand network routing details like ASN.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Is IP geolocation 100% accurate?</summary>
-                    <p>IP geolocation is generally accurate at the country level and often at the city level. However, it typically cannot pinpoint an exact street address. Accuracy depends on the database used and how up-to-date it is.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Can I find someone's exact location using an IP address?</summary>
-                    <p>No, an IP address generally does not reveal an exact physical address. It provides an approximate location, often at the city or ISP level. For precise location, law enforcement would need to contact the ISP with a legal warrant.</p>
-                </details>
-                 <details class="faq-item">
-                    <summary>Is it legal to look up an IP address?</summary>
-                    <p>Yes, looking up publicly available information associated with an IP address is legal. IP addresses are public records, and this tool uses publicly accessible databases.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>What's the difference between IPv4 and IPv6?</summary>
-                    <p>IPv4 uses a 32-bit address scheme allowing for over 4 billion addresses. IPv6 uses a 128-bit address scheme, providing a vastly larger address space to accommodate the growing number of internet-connected devices. Our tool supports both.</p>
-                </details>
-            </div>
-        </section>
-
-        <section class="blog-preview-section">
-            <div class="container">
-                <h2>From Our Blog: Learn More</h2>
-                <div class="blog-grid">
-                    <article class="blog-article-card">
-                        <!-- <img src="assets/images/blog-preview-1.jpg" alt="Digital footprint illustration" class="blog-card-image"> -->
-                        <div class="blog-card-placeholder-image"></div>
-                        <div class="blog-card-content">
-                            <h3><a href="/blog/ip-address-digital-footprint">Understanding Your Digital Footprint</a></h3>
-                            <p>Dive deep into what your IP address reveals and how to manage online privacy...</p>
-                            <a href="/blog/ip-address-digital-footprint" class="text-link">Read More →</a>
-                        </div>
-                    </article>
-                    <article class="blog-article-card">
-                        <!-- <img src="assets/images/blog-preview-2.jpg" alt="IPv4 vs IPv6 comparison" class="blog-card-image"> -->
-                        <div class="blog-card-placeholder-image"></div>
-                        <div class="blog-card-content">
-                            <h3><a href="/blog/ipv4-exhaustion-ipv6-rise">IPv4 Exhaustion & The Rise of IPv6</a></h3>
-                            <p>Explore the transition from IPv4 to IPv6 and its implications for the internet...</p>
-                            <a href="/blog/ipv4-exhaustion-ipv6-rise" class="text-link">Read More →</a>
-                        </div>
-                    </article>
-                    <article class="blog-article-card">
-                        <!-- <img src="assets/images/blog-preview-3.jpg" alt="IP address protection shield" class="blog-card-image"> -->
-                        <div class="blog-card-placeholder-image"></div>
-                        <div class="blog-card-content">
-                            <h3><a href="/blog/protect-ip-address-security">Top 5 Ways to Protect Your IP Address</a></h3>
-                            <p>Learn practical tips and tools to safeguard your IP address and enhance security...</p>
-                            <a href="/blog/protect-ip-address-security" class="text-link">Read More →</a>
-                        </div>
-                    </article>
-                </div>
-                <div style="text-align: center; margin-top: 2rem;">
-                    <a href="/blog" class="cta-button">View All Blog Posts</a>
-                </div>
-            </div>
-        </section>
-    </main>
+    </div>
 
     <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <section class="footer-column">
-                    <h4>FormatJson: IP Lookup</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact Us</a></li>
-                        <li><a href="/blog">Blog</a></li>
-                    </ul>
-                </section>
-                <section class="footer-column">
-                    <h4>Tools</h4>
-                    <ul>
-                        <li><a href="/ip-lookup-tool">IP Lookup</a></li>
-                        <li><a href="/my-ip-address">My IP Address</a></li>
-                        <li><a href="/hostname-lookup">Hostname Lookup</a></li>
-                        <li><a href="/dns-lookup">DNS Lookup</a></li>
-                    </ul>
-                </section>
-                <section class="footer-column">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="/privacy-policy">Privacy Policy</a></li>
-                        <li><a href="/terms-of-service">Terms of Service</a></li>
-                        <li><a href="/disclaimer">Disclaimer</a></li>
-                    </ul>
-                </section>
-                <section class="footer-column">
-                    <h4>Connect</h4>
-                    <div class="social-media-links">
-                        <a href="https://twitter.com/formatjson" aria-label="Formatjson on Twitter">Twitter</a>
-                        <a href="https://facebook.com/formatjson" aria-label="Formatjson on Facebook">Facebook</a>
-                        <a href="https://linkedin.com/company/formatjson" aria-label="Formatjson on LinkedIn">LinkedIn</a>
-                    </div>
-                </section>
-            </div>
-            <p class="copyright-text">
-                © <span id="currentYear"></span> FormatJson All Rights Reserved. IP data provided by third-party services.
-            </p>
-        </div>
+        <p>Powered by <a href="https://ipinfo.io/" target="_blank" rel="noopener noreferrer">ipinfo.io</a>. Secure and Fast.</p>
+        <p>© <script>document.write(new Date().getFullYear())</script> FormatJSON.com - Part of your suite for developer tools.</p>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- External JS Libraries and a_lookup_script.js -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
