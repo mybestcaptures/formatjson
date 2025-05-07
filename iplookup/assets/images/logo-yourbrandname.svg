@@ -1,0 +1,7 @@
+<svg width="150" height="40" viewBox="0 0 150 40" xmlns="http://www.w3.org/2000/svg">
+  <rect width="150" height="40" fill="#212529"/>
+  <text x="10" y="28" font-family="Montserrat, sans-serif" font-size="20" fill="#FFFFFF" font-weight="bold">
+    IPlookup
+  </text>
+  <circle cx="125" cy="20" r="10" fill="#0D6EFD"/>
+</svg>
