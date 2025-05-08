@@ -1,19 +1,376 @@
-/* ... (previous CSS) ... */
+/* Basic Reset & Defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #f9fafb;
+    --text-color: #333;
+    --text-color-light: #555;
+    --text-color-inverted: #ecf0f1;
+    --header-bg: #2c3e50;
+    --header-text: #ecf0f1;
+    --header-subtitle: #bdc3c7;
+    --header-border: #3498db;
+    --card-bg: #fff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --card-shadow-light: rgba(0, 0, 0, 0.08);
+    --input-bg: #fdfdfd;
+    --input-border: #ddd;
+    --input-focus-border: #3498db;
+    --input-focus-shadow: rgba(52, 152, 219, 0.2);
+    --btn-primary-bg: #3498db;
+    --btn-primary-text: white;
+    --btn-primary-hover-bg: #2980b9;
+    --btn-secondary-bg: #ecf0f1;
+    --btn-secondary-text: #2c3e50;
+    --btn-secondary-border: #bdc3c7;
+    --btn-secondary-hover-bg: #dfe4e7;
+    --h2-color: #34495e;
+    --h2-border: #e0e0e0;
+    --link-color: #3498db;
+    --link-hover-color: #2980b9;
+    --footer-bg: #34495e;
+    --footer-text: #bdc3c7;
+    --footer-link: #ecf0f1;
+    --error-bg: #f8d7da;
+    --error-text: #721c24;
+    --error-border: #f5c6cb;
+    --faq-question-hover-bg: #f0f0f0;
+    --faq-answer-bg: #f9f9f9;
+    --icon-btn-border: var(--header-subtitle);
+    --icon-btn-color: var(--header-subtitle);
+    --icon-btn-hover-bg: var(--header-subtitle);
+    --icon-btn-hover-color: var(--header-bg);
+}
+
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --text-color-light: #b0b0b0;
+    --text-color-inverted: #2c3e50;
+    --header-bg: #1f2937;
+    --header-text: #e5e7eb;
+    --header-subtitle: #9ca3af;
+    --header-border: #5fa8d3;
+    --card-bg: #2d2d2d;
+    --card-shadow: rgba(0, 0, 0, 0.3);
+    --card-shadow-light: rgba(0, 0, 0, 0.2);
+    --input-bg: #3a3a3a;
+    --input-border: #555;
+    --input-focus-border: #5fa8d3;
+    --input-focus-shadow: rgba(95, 168, 211, 0.3);
+    --btn-primary-bg: #5fa8d3;
+    --btn-primary-text: #121212;
+    --btn-primary-hover-bg: #4a8db3;
+    --btn-secondary-bg: #4a4a4a;
+    --btn-secondary-text: #e0e0e0;
+    --btn-secondary-border: #666;
+    --btn-secondary-hover-bg: #5a5a5a;
+    --h2-color: #c0c0c0;
+    --h2-border: #444;
+    --link-color: #6fb8e4;
+    --link-hover-color: #8bc4ec;
+    --footer-bg: #1f2937;
+    --footer-text: #9ca3af;
+    --footer-link: #e5e7eb;
+    --error-bg: #582c2c;
+    --error-text: #f5c6cb;
+    --error-border: #a04040;
+    --faq-question-hover-bg: #383838;
+    --faq-answer-bg: #333333;
+    --icon-btn-border: var(--header-subtitle);
+    --icon-btn-color: var(--header-subtitle);
+    --icon-btn-hover-bg: var(--header-subtitle);
+    --icon-btn-hover-color: var(--header-bg);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Header */
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 20px 0;
+    border-bottom: 4px solid var(--header-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header-content h1 {
+    font-size: 2.2em;
+    margin-bottom: 0.1em;
+    color: var(--header-text);
+    transition: color 0.3s ease;
+}
+
+.header-content .subtitle {
+    font-size: 1em;
+    color: var(--header-subtitle);
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.btn-icon { /* For dark mode toggle */
+    background: transparent;
+    border: 1px solid var(--icon-btn-border);
+    color: var(--icon-btn-color);
+    padding: 8px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-icon:hover {
+    background-color: var(--icon-btn-hover-bg);
+    color: var(--icon-btn-hover-color);
+    border-color: var(--icon-btn-hover-bg);
+}
+
+.btn-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Main Tool Area */
+.tool-container {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--card-shadow);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.io-panel {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+}
+
+.input-area, .options-area, .output-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-area h2, .options-area h2, .output-area h2 {
+    font-size: 1.5em;
+    color: var(--h2-color);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--h2-border);
+    padding-bottom: 8px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    resize: vertical;
+    min-height: 200px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+textarea::placeholder {
+    color: var(--text-color-light);
+    transition: color 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 2px var(--input-focus-shadow);
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+}
+.btn-primary:hover {
+    background-color: var(--btn-primary-hover-bg);
+}
+
+.btn-secondary {
+    background-color: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
+    border: 1px solid var(--btn-secondary-border);
+}
+.btn-secondary:hover {
+    background-color: var(--btn-secondary-hover-bg);
+}
+.btn:active {
+    transform: translateY(1px);
+}
+
+.file-actions, .output-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#csvFile {
+    border: 1px solid var(--input-border);
+    color: var(--text-color);
+    padding: 8px;
+    border-radius: 5px;
+    flex-grow: 1;
+    background-color: var(--input-bg); /* Ensure file input bg also changes */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Options Area */
+.options-area label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    display: block;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.options-area select,
+.options-area input[type="text"] {
+    padding: 8px;
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    width: 100%;
+    margin-bottom: 0;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.option-group {
+    margin-bottom: 18px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin-bottom: 0;
+    accent-color: var(--btn-primary-bg); /* Styles the checkbox color */
+}
+.checkbox-group label {
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+/* Error Message */
+.error-message {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid var(--error-border);
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Content Section */
+.content-section {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--card-shadow-light);
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-section h2 {
+    font-size: 1.8em;
+    color: var(--h2-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--h2-border);
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.content-section p, .content-section li, .content-section dd {
+    margin-bottom: 15px;
+    color: var(--text-color-light);
+    transition: color 0.3s ease;
+}
+.content-section ul, .content-section ol {
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+.content-section dl dt { /* Though we replaced dl with divs for FAQ, keep if used elsewhere */
+    font-weight: bold;
+    color: var(--text-color);
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+.content-section a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.content-section a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
 
 /* FAQ Styles */
 .faq-container {
     margin-top: 20px;
 }
-
 .faq-item {
-    border-bottom: 1px solid var(--input-border); /* Use a theme variable */
+    border-bottom: 1px solid var(--input-border);
     margin-bottom: 10px;
+    transition: border-color 0.3s ease;
 }
-
 .faq-item:last-child {
     border-bottom: none;
 }
-
 .faq-question {
     background-color: transparent;
     border: none;
@@ -22,47 +379,111 @@
     text-align: left;
     font-size: 1.1em;
     font-weight: 600;
-    color: var(--text-color); /* Use theme variable */
+    color: var(--text-color);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, color 0.3s ease;
 }
-
 .faq-question:hover,
 .faq-question:focus {
-    background-color: var(--faq-question-hover-bg); /* Use theme variable */
+    /* background-color: var(--faq-question-hover-bg); */ /* Optional hover background */
+    color: var(--link-hover-color); /* Highlight on hover */
     outline: none;
 }
-
 .faq-icon {
     font-size: 1.2em;
     font-weight: bold;
     transition: transform 0.2s ease-in-out;
+    margin-left: 10px; /* Space from text */
 }
-
 .faq-answer {
-    padding: 0px 15px 15px 15px; /* Padding for the content inside */
+    padding: 0px 15px 0px 15px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-    background-color: var(--faq-answer-bg); /* Subtle background for answer */
-    border-left: 3px solid var(--input-focus-border); /* Accent border */
+    background-color: var(--faq-answer-bg);
+    border-left: 3px solid var(--input-focus-border);
     border-radius: 0 0 4px 4px;
+    margin-bottom: 10px; /* Space after open answer */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-
 .faq-answer p {
-    margin-bottom: 0; /* Reset if needed, or adjust as per content */
+    margin-bottom: 0;
+    padding: 15px 0; /* Add padding inside p for better spacing */
     color: var(--text-color-light);
+    transition: color 0.3s ease;
 }
-
 .faq-item .faq-question[aria-expanded="true"] + .faq-answer {
-    max-height: 500px; /* Adjust if your answers are very long */
-    padding-top: 15px;
-    padding-bottom: 15px;
+    max-height: 500px; /* Adjust if answers are very long */
+}
+.faq-item .faq-question[aria-expanded="true"] .faq-icon {
+    transform: rotate(45deg);
 }
 
-.faq-item .faq-question[aria-expanded="true"] .faq-icon {
-    transform: rotate(45deg); /* Changes + to x or similar effect */
+/* Footer */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+footer a {
+    color: var(--footer-link);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+footer a:hover {
+    text-decoration: underline;
+    color: var(--text-color-inverted);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .io-panel {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+    .input-area {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+    }
+    .options-area {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+    }
+    .output-area {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+    .input-area textarea, .output-area textarea {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 767px) { /* Adjust header for smaller screens */
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    .header-content h1 {
+        font-size: 1.8em;
+    }
+    .header-content .subtitle {
+        font-size: 0.9em;
+    }
+    .btn-icon { /* Dark mode toggle */
+        margin-top: 10px;
+        align-self: flex-end;
+    }
+}
+
+@media (min-width: 1024px) {
+    .header-content h1 {
+        font-size: 2.5em; /* Larger title for desktop */
+    }
 }
