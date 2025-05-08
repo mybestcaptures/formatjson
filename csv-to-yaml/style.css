@@ -104,6 +104,13 @@ body {
 .fullbleed-wrap {
   background-color: #1165ed;
 }
+.focus-in-expand {
+	animation: focus-in-expand 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.focus-in-expand-2 {
+	animation: focus-in-expand 1s .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
 
 /* Header */
 header {
