@@ -118,8 +118,8 @@ body {
 
 /* Header */
 header {
-    background-color: #1a1a1a;
-    color: var(--text-color);
+    background-color: var(--header-bg);
+    color: var(--header-text);
     border-bottom: 4px solid var(--header-border);
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
