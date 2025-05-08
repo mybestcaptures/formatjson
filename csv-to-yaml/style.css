@@ -101,6 +101,9 @@ body {
     margin: 0 auto;
     padding: 10px 0;
 }
+.fullbleed-wrap {
+  background-color: #1165ed;
+}
 
 /* Header */
 header {
