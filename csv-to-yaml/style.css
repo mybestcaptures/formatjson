@@ -104,7 +104,7 @@ body {
 
 /* Header */
 header {
-    background-color: var(--header-bg);
+    background-color: #f4f6f9;
     color: var(--header-text);
     padding: 10px 0;
     border-bottom: 4px solid var(--header-border);
