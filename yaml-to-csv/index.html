@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>YAML to CSV Converter | Free, Online & Easy | Edit & Format</title>
+    <meta name="description" content="Effortlessly convert YAML data to CSV format online. Free, fast, and user-friendly YAML to CSV converter with options for delimiter and header inclusion. Includes dark mode.">
+    <meta name="keywords" content="yaml to csv, convert yaml to csv, yaml csv converter, online yaml to csv, free yaml to csv, yaml to csv tool, csv from yaml, format csv, yaml data conversion, dark mode converter">
+    <link rel="canonical" href="https://www.formatjson.com/yaml-to-csv"> <!-- UPDATE THIS -->
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.formatjson.com/yaml-to-csv"> <!-- UPDATE THIS -->
+    <meta property="og:title" content="YAML to CSV Converter | Free, Online & Easy | Edit & Format">
+    <meta property="og:description" content="Effortlessly convert YAML data to CSV format online. Free, fast, and user-friendly YAML to CSV converter with options for delimiter and header inclusion.">
+    <meta property="og:image" content="https://www.formatjson.com/og-image-yaml-csv.png"> <!-- CREATE AND UPDATE THIS -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.formatjson.com/yaml-to-csv"> <!-- UPDATE THIS -->
+    <meta property="twitter:title" content="YAML to CSV Converter | Free, Online & Easy | Edit & Format">
+    <meta property="twitter:description" content="Effortlessly convert YAML data to CSV format online. Free, fast, and user-friendly YAML to CSV converter with options for delimiter and header inclusion.">
+    <meta property="twitter:image" content="https://www.formatjson.com/twitter-card-yaml-csv.png"> <!-- CREATE AND UPDATE THIS -->
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Libraries -->
+    <script src="js-yaml.min.js"></script>
+    <script src="papaparse.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>YAML to CSV Converter</h1>
+                    <p class="subtitle">Easily convert YAML data into CSV format with output options.</p>
+                </div>
+                <button id="darkModeToggle" class="btn-icon" aria-label="Toggle dark mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon-sun">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18.75a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25a.75.75 0 01.75-.75zM5.166 17.834a.75.75 0 00-1.06 1.06l1.59 1.591a.75.75 0 001.061-1.06l-1.59-1.591zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.166 5.106a.75.75 0 001.06 1.06l1.591-1.59a.75.75 0 00-1.061-1.06L5.106 6.166z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon-moon" style="display:none;">
+                        <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.51 1.713-6.622 4.431-8.528a.75.75 0 01.818.162z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container tool-container">
+            <div class="io-panel">
+                <div class="input-area">
+                    <h2><label for="yamlInput">1. Paste YAML Data or Upload File</label></h2>
+                    <textarea id="yamlInput" rows="15" placeholder="- name: Alice\n  age: 30\n  city: New York\n- name: Bob\n  age: 24\n  city: London"></textarea>
+                    <div class="file-actions">
+                        <input type="file" id="yamlFile" accept=".yaml, .yml, .txt">
+                        <button id="clearInputBtn" class="btn btn-secondary">Clear Input</button>
+                    </div>
+                </div>
+
+                <div class="options-area">
+                    <h2>2. CSV Output Options</h2>
+                    <div class="option-group">
+                        <label for="csvDelimiter">CSV Delimiter:</label>
+                        <select id="csvDelimiter">
+                            <option value="," selected>Comma (,)</option>
+                            <option value=";">Semicolon (;)</option>
+                            <option value="\t">Tab (\t)</option>
+                            <option value="|">Pipe (|)</option>
+                            <option value=" ">Space ( )</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group checkbox-group">
+                        <input type="checkbox" id="includeHeaderCsv" name="includeHeaderCsv" checked>
+                        <label for="includeHeaderCsv">Include Header Row in CSV</label>
+                    </div>
+                    <br>
+                    <button id="convertToCsvBtn" class="btn btn-primary">Convert to CSV</button>
+                </div>
+
+                <div class="output-area">
+                    <h2><label for="csvOutput">3. CSV Output</label></h2>
+                    <textarea id="csvOutput" rows="15" placeholder="Your CSV output will appear here..." readonly></textarea>
+                    <div class="output-actions">
+                        <button id="copyCsvBtn" class="btn btn-secondary">Copy CSV</button>
+                        <button id="downloadCsvBtn" class="btn btn-secondary">Download CSV</button>
+                    </div>
+                </div>
+            </div>
+            <div id="errorMessage" class="error-message" style="display:none;"></div>
+        </div>
+
+        <section class="container content-section">
+            <h2>How to Use Our YAML to CSV Converter</h2>
+            <p>Converting your YAML (YAML Ain't Markup Language) data to CSV (Comma Separated Values) is straightforward:</p>
+            <ol>
+                <li><strong>Input YAML:</strong> Paste your YAML data into the left-hand text area, or click "Choose File" to upload a .yaml, .yml, or .txt file. The YAML should typically represent a list of objects.</li>
+                <li><strong>Set CSV Options:</strong>
+                    <ul>
+                        <li><strong>CSV Delimiter:</strong> Choose the character to separate values in your output CSV (e.g., comma, semicolon).</li>
+                        <li><strong>Include Header Row:</strong> Check this box if you want the first row of your CSV to be the keys from your YAML objects.</li>
+                    </ul>
+                </li>
+                <li><strong>Convert:</strong> Click the "Convert to CSV" button.</li>
+                <li><strong>Get CSV:</strong> Your converted CSV will appear in the right-hand text area. You can edit it if needed after successful conversion.</li>
+                <li><strong>Copy or Download:</strong> Use the respective buttons to get your CSV data.</li>
+            </ol>
+
+            <h2>Why Convert YAML to CSV?</h2>
+            <ul>
+                <li><strong>Spreadsheet Software:</strong> CSV is easily imported into spreadsheet programs like Excel, Google Sheets, or LibreOffice Calc for analysis and manipulation.</li>
+                <li><strong>Data Exchange:</strong> CSV is a simple, widely supported format for exchanging tabular data between different systems.</li>
+                <li><strong>Database Import:</strong> Many databases support importing data from CSV files.</li>
+                <li><strong>Simplicity for Tabular Data:</strong> If your hierarchical YAML data can be flattened into a simple table, CSV is often a more direct representation for that specific view.</li>
+            </ul>
+
+            <h2>Features of This YAML to CSV Tool</h2>
+            <ul>
+                <li><strong>Direct Input & File Upload:</strong> Paste YAML or upload .yaml/.yml files.</li>
+                <li><strong>Customizable CSV Delimiters:</strong> Choose comma, semicolon, tab, pipe, or space for your CSV output.</li>
+                <li><strong>CSV Header Option:</strong> Control whether to include a header row in the CSV.</li>
+                <li><strong>Editable Output:</strong> Modify the generated CSV.</li>
+                <li><strong>Copy & Download:</strong> Easy access to your results.</li>
+                <li><strong>Error Handling:</strong> Clear feedback for YAML parsing issues.</li>
+                <li><strong>Responsive Design:</strong> Works on all devices.</li>
+                <li><strong>Dark Mode:</strong> Switch themes for your viewing preference.</li>
+                <li><strong>Free & Online:</strong> No installation or signup required.</li>
+            </ul>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq1-answer">
+                        What kind of YAML structure works best?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div id="faq1-answer" class="faq-answer" role="region" aria-labelledby="faq1-question">
+                        <p>The ideal YAML input is a list (array) of flat objects (key-value pairs). For example:
+                        <pre><code>- name: Item 1\n  value: 100\n- name: Item 2\n  value: 200</code></pre>
+                        Each object in the list will become a row in the CSV. If you provide a single YAML object, it will be treated as a single row in the CSV.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq2-answer">
+                        How are nested YAML objects handled?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div id="faq2-answer" class="faq-answer" role="region" aria-labelledby="faq2-question">
+                        <p>PapaParse (the library used for CSV generation) will attempt to flatten nested objects. For simple nesting, it often produces a reasonable result (e.g., `parent.child: value`). For complex, deeply nested structures, the resulting CSV might become very wide or less readable. CSV is inherently a flat format.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq3-answer">
+                        Can I specify how quotes are handled in the CSV?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div id="faq3-answer" class="faq-answer" role="region" aria-labelledby="faq3-question">
+                        <p>Currently, this tool uses the default quoting behavior of PapaParse, which generally quotes fields only when necessary (e.g., if they contain the delimiter, newlines, or quotes themselves). Advanced quoting options are not exposed in this version but could be a future enhancement.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© <span id="currentYear"></span> FormatJson. All Rights Reserved. | <a href="/privacy.html">Privacy Policy</a> | <a href="/contactUs.html">Contact</a> | <a href="about.html">About Us</a> | <a href="/termsAndConditions.html">Terms and Conditions</a></p>
+       </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
