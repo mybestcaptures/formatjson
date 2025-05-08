@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags - CRITICAL -->
+    <title>CSV to YAML Converter | Free, Online & Easy | Edit & Format</title>
+    <meta name="description" content="Effortlessly convert CSV data to YAML format online. Free, fast, and user-friendly CSV to YAML converter with editing and formatting options. No signup required.">
+    <meta name="keywords" content="csv to yaml, convert csv to yaml, csv yaml converter, online csv to yaml, free csv to yaml, csv to yaml tool, yaml from csv, format yaml, edit yaml">
+    <link rel="canonical" href="https://www.formatjson.com/csv-to-yaml"> 
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.formatjson.com/csv-to-yaml">
+    <meta property="og:title" content="CSV to YAML Converter | Free, Online & Easy | Edit & Format">
+    <meta property="og:description" content="Effortlessly convert CSV data to YAML format online. Free, fast, and user-friendly CSV to YAML converter with editing and formatting options.">
+    <meta property="og:image" content="https://www.formatjson.com/og-image-csv-yaml.png"> <!-- Create a compelling image -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.formatjson.com/csv-to-yaml">
+    <meta property="twitter:title" content="CSV to YAML Converter | Free, Online & Easy | Edit & Format">
+    <meta property="twitter:description" content="Effortlessly convert CSV data to YAML format online. Free, fast, and user-friendly CSV to YAML converter with editing and formatting options.">
+    <meta property="twitter:image" content="https://www.formatjson.com/twitter-card-csv-yaml.png"> <!-- Create a compelling image -->
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Libraries (use CDNs for simplicity, or download and host locally) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>CSV to YAML Converter</h1>
+            <p class="subtitle">Easily convert, edit, and format your CSV data into YAML.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container tool-container">
+            <div class="io-panel">
+                <div class="input-area">
+                    <h2><label for="csvInput">1. Paste CSV Data or Upload File</label></h2>
+                    <textarea id="csvInput" rows="15" placeholder="name,age,city\nAlice,30,New York\nBob,24,London\nCharlie,35,Paris"></textarea>
+                    <div class="file-actions">
+                        <input type="file" id="csvFile" accept=".csv">
+                        <button id="clearCsvBtn" class="btn btn-secondary">Clear CSV</button>
+                    </div>
+                </div>
+
+                <div class="options-area">
+                    <h2>2. Options</h2>
+                    <label for="indentation">Indentation:</label>
+                    <select id="indentation">
+                        <option value="2" selected>2 Spaces</option>
+                        <option value="4">4 Spaces</option>
+                        <option value="tab">Tabs</option>
+                    </select>
+                    <br><br>
+                    <button id="convertBtn" class="btn btn-primary">Convert to YAML</button>
+                </div>
+
+                <div class="output-area">
+                    <h2><label for="yamlOutput">3. YAML Output</label></h2>
+                    <textarea id="yamlOutput" rows="15" placeholder="Your YAML output will appear here..."></textarea>
+                    <div class="output-actions">
+                        <button id="copyYamlBtn" class="btn btn-secondary">Copy YAML</button>
+                        <button id="downloadYamlBtn" class="btn btn-secondary">Download YAML</button>
+                    </div>
+                </div>
+            </div>
+            <div id="errorMessage" class="error-message" style="display:none;"></div>
+        </div>
+
+        <section class="container content-section">
+            <h2>How to Use Our CSV to YAML Converter</h2>
+            <p>Converting your CSV (Comma Separated Values) files or data to YAML (YAML Ain't Markup Language) is simple with our tool:</p>
+            <ol>
+                <li><strong>Input CSV:</strong> Paste your CSV data directly into the left-hand text area, or click the "Choose File" button to upload a .csv file from your computer.</li>
+                <li><strong>Set Options (Optional):</strong> Choose your preferred YAML indentation (2 spaces, 4 spaces, or tabs).</li>
+                <li><strong>Convert:</strong> Click the "Convert to YAML" button.</li>
+                <li><strong>Get YAML:</strong> Your converted YAML will appear in the right-hand text area. You can edit it directly if needed.</li>
+                <li><strong>Copy or Download:</strong> Use the "Copy YAML" button to copy it to your clipboard, or "Download YAML" to save it as a .yaml file.</li>
+            </ol>
+
+            <h2>Why Convert CSV to YAML?</h2>
+            <p>While CSV is great for simple tabular data, YAML offers several advantages, especially for configuration files, data serialization, and inter-process messaging:</p>
+            <ul>
+                <li><strong>Human Readability:</strong> YAML is designed to be easily readable by humans, using indentation to denote structure.</li>
+                <li><strong>Hierarchical Data:</strong> YAML naturally represents complex, nested data structures, which is harder to do cleanly in CSV.</li>
+                <li><strong>Data Types:</strong> YAML supports more explicit data types like lists, dictionaries (mappings), scalars (strings, numbers, booleans), nulls, and dates.</li>
+                <li><strong>Comments:</strong> YAML allows for comments, making it easier to document configurations or data.</li>
+                <li><strong>Widely Used:</strong> YAML is popular in many development and DevOps tools (e.g., Docker Compose, Kubernetes, Ansible, CI/CD pipelines).</li>
+            </ul>
+
+            <h2>Features of This CSV to YAML Tool</h2>
+            <ul>
+                <li><strong>Direct Input & File Upload:</strong> Paste data or upload .csv files.</li>
+                <li><strong>Real-time Conversion:</strong> (If implemented with on-input event, or fast on button click).</li>
+                <li><strong>YAML Formatting Options:</strong> Control indentation (spaces or tabs).</li>
+                <li><strong>Editable Output:</strong> Modify the generated YAML directly in the text area.</li>
+                <li><strong>Copy to Clipboard:</strong> Easily copy the YAML output.</li>
+                <li><strong>Download YAML File:</strong> Save your result as a .yaml file.</li>
+                <li><strong>Error Handling:</strong> Provides feedback for invalid CSV input.</li>
+                <li><strong>Responsive Design:</strong> Works seamlessly on desktop, tablet, and mobile devices.</li>
+                <li><strong>Free & Online:</strong> No installation or signup required.</li>
+            </ul>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <dl>
+                <dt>Is this CSV to YAML converter free?</dt>
+                <dd>Yes, this tool is completely free to use.</dd>
+                <dt>Can I edit the YAML output?</dt>
+                <dd>Absolutely! The YAML output area is an editable textarea. You can make changes before copying or downloading.</dd>
+                <dt>What if my CSV has headers?</dt>
+                <dd>Our tool automatically uses the first row of your CSV as keys for the YAML objects. If your CSV has no headers, it will use generic keys (e.g., column_1, column_2) or you can adjust the parser options (advanced feature not fully implemented in this basic example).</dd>
+                 <dt>How does the tool handle different CSV delimiters?</dt>
+                <dd>Currently, this tool assumes comma (,) as the delimiter. Advanced delimiter options could be a future enhancement.</dd>
+            </dl>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© <span id="currentYear"></span> YourBrand/YourName. All Rights Reserved. | <a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
