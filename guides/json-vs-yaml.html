@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON vs YAML (When to Use Each) | formatjson.com</title>
+  <meta name="description" content="JSON vs YAML: differences, pros/cons, and when to choose each format. Includes examples and common pitfalls." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    JSON vs YAML
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>JSON vs YAML: what’s the difference?</h1>
+    <p class="muted">Both JSON and YAML are used to represent structured data. JSON is strict and universal; YAML is more human-friendly but easier to get wrong.</p>
+
+    <h2>Quick comparison</h2>
+    <ul>
+      <li><strong>Best for machines</strong>: JSON</li>
+      <li><strong>Best for humans editing configs</strong>: YAML (carefully)</li>
+      <li><strong>Strictness</strong>: JSON is strict; YAML has more “magic” and implicit typing</li>
+      <li><strong>Comments</strong>: YAML supports comments; JSON does not (by default)</li>
+    </ul>
+
+    <h2>Example: same data</h2>
+    <p>JSON:</p>
+    <pre><code>{
+  "service": "api",
+  "port": 8080,
+  "enabled": true,
+  "tags": ["prod", "us-east-1"]
+}</code></pre>
+
+    <p>YAML:</p>
+    <pre><code>service: api
+port: 8080
+enabled: true
+tags:
+  - prod
+  - us-east-1</code></pre>
+
+    <h2>Common YAML pitfalls</h2>
+    <ul>
+      <li><strong>Indentation</strong>: spaces matter; inconsistent indentation breaks parsing.</li>
+      <li><strong>Implicit types</strong>: strings like <code>on</code>, <code>off</code>, or dates can be interpreted unexpectedly by some parsers.</li>
+      <li><strong>Tabs</strong>: many YAML parsers reject tabs.</li>
+    </ul>
+
+    <h2>When to choose JSON</h2>
+    <ul>
+      <li>APIs and network payloads</li>
+      <li>Interoperability across languages and systems</li>
+      <li>When you want strict validation and predictable parsing</li>
+    </ul>
+
+    <h2>When to choose YAML</h2>
+    <ul>
+      <li>Configuration files edited by humans</li>
+      <li>When comments are important</li>
+      <li>When readability matters more than strictness</li>
+    </ul>
+
+    <p>Related: <a href="/guides/validate-json.html">Validate JSON</a> · <a href="/guides/pretty-print-json.html">Pretty print JSON</a></p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

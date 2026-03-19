@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NDJSON / JSON Lines (What It Is & How to Use It) | formatjson.com</title>
+  <meta name="description" content="NDJSON (JSON Lines) explained: one JSON object per line for logs and streaming. Examples and common mistakes." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    NDJSON / JSON Lines
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>NDJSON / JSON Lines: one JSON object per line</h1>
+    <p class="muted">NDJSON (newline-delimited JSON) stores many JSON objects as separate lines. It’s popular for logs, data pipelines, and streaming.</p>
+
+    <h2>What it looks like</h2>
+    <p>Each line is valid JSON by itself:</p>
+    <pre><code>{"ts":"2026-03-19T10:00:00Z","level":"info","msg":"started"}
+{"ts":"2026-03-19T10:00:01Z","level":"warn","msg":"retrying","attempt":2}
+{"ts":"2026-03-19T10:00:02Z","level":"info","msg":"done"}</code></pre>
+
+    <h2>How it differs from a JSON array</h2>
+    <p>A JSON array is one JSON document:</p>
+    <pre><code>[
+  {"id": 1},
+  {"id": 2}
+]</code></pre>
+    <p>NDJSON is many JSON documents separated by newlines.</p>
+
+    <h2>Why it’s useful</h2>
+    <ul>
+      <li><strong>Streaming</strong>: process line-by-line without loading the whole file</li>
+      <li><strong>Appending</strong>: easy to append new records</li>
+      <li><strong>Robust logs</strong>: a bad line doesn’t necessarily break the whole file</li>
+    </ul>
+
+    <h2>Common mistakes</h2>
+    <ul>
+      <li><strong>Trailing commas</strong>: not allowed in JSON</li>
+      <li><strong>Pretty printing the whole file</strong>: can break “one object per line” conventions</li>
+      <li><strong>Mixing formats</strong>: don’t mix NDJSON and JSON arrays unless the consumer expects it</li>
+    </ul>
+
+    <p>Related: <a href="/guides/large-json.html">Large JSON tips</a> · <a href="/guides/validate-json.html">Validate JSON</a></p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

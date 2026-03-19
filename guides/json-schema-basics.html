@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON Schema Basics (Validate Data Structure) | formatjson.com</title>
+  <meta name="description" content="Learn JSON Schema basics: types, required fields, enums, and nested objects. Includes a small schema example." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    JSON Schema basics
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>JSON Schema basics: validate the shape of JSON</h1>
+    <p class="muted">JSON validates syntax (is it parseable). JSON Schema validates structure (does it match what your API expects).</p>
+
+    <h2>What JSON Schema is for</h2>
+    <ul>
+      <li><strong>APIs</strong>: ensure requests and responses follow an agreed contract</li>
+      <li><strong>Forms</strong>: validate user input on the client and server</li>
+      <li><strong>Data pipelines</strong>: reject malformed events early</li>
+    </ul>
+
+    <h2>A small example</h2>
+    <p>Example JSON:</p>
+    <pre><code>{
+  "id": 42,
+  "email": "asha@example.com",
+  "role": "admin",
+  "active": true
+}</code></pre>
+
+    <p>Example schema (simplified):</p>
+    <pre><code>{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "email", "role"],
+  "properties": {
+    "id": { "type": "integer", "minimum": 1 },
+    "email": { "type": "string", "format": "email" },
+    "role": { "type": "string", "enum": ["admin", "editor", "viewer"] },
+    "active": { "type": "boolean" }
+  }
+}</code></pre>
+
+    <h2>Key concepts</h2>
+    <ul>
+      <li><strong>type</strong>: object, array, string, number, integer, boolean, null</li>
+      <li><strong>required</strong>: which keys must exist</li>
+      <li><strong>additionalProperties</strong>: whether unknown keys are allowed</li>
+      <li><strong>enum</strong>: restrict values to a known set</li>
+      <li><strong>nested validation</strong>: schemas can describe nested objects and arrays</li>
+    </ul>
+
+    <h2>How this helps in practice</h2>
+    <p>If you receive “valid JSON but wrong data”, schema validation tells you which field is missing or wrong—much faster than manual debugging.</p>
+
+    <p>Related: <a href="/guides/validate-json.html">Validate JSON syntax</a> · <a href="/guides/api-json-best-practices.html">API JSON best practices</a></p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

@@ -5,68 +5,25 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/js/all.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/js/all.js"></script>
    <title>Contact Us | formatjson.com</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    h1 {
-      color: #111;
-    }
-      header {
-      box-sizing: border-box;
-      padding: 16px;
-      font-size: 20px;
-      background-color: #1165ed;
-      color: white;
-      min-height: 60px;
-            }
-    form {
-      margin-top: 20px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      margin-top: 15px;
-      background-color: #0066cc;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #004a99;
-    }
-  </style>
+  <link rel="stylesheet" href="/content.css" />
 </head>
 <body>
      <header>
     <i class="fas fa-globe"></i> Contact Us
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+      <a href="/privacy.html">Privacy</a>
+    </div>
   </header>
-  <p>Have a question, feedback, or support request? We'd love to hear from you! Fill out the form below or email us directly at <a href="mailto:support@formatjson.com">support@formatjson.com</a>.</p>
+  <div class="card">
+    <p>Have a question, feedback, or support request? Email us at <a href="mailto:support@formatjson.com">support@formatjson.com</a>.</p>
+    <p class="muted">Note: This form is informational unless you connect it to a backend. Email is the fastest way to reach us.</p>
 
-  <form action="#" method="post">
+  <form class="card" action="#" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required />
 
@@ -78,10 +35,11 @@
 
     <button type="submit">Send Message</button>
   </form>
+  </div>
 </body>
 
     
-    <footer align="center">
-  <a href="/">Format JSON</a> | <a href="/privacy.html">Privacy Policy</a> | <a href="about.html">About Us</a> | <a href="/termsAndConditions.html">Terms and Conditions</a>
-</footer>
+    <footer>
+  <a href="/">Format JSON</a> · <a href="/privacy.html">Privacy Policy</a> · <a href="/about.html">About Us</a> · <a href="/termsAndConditions.html">Terms and Conditions</a>
+    </footer>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escape JSON Strings (Quotes, Newlines, Backslashes) | formatjson.com</title>
+  <meta name="description" content="Learn how to escape JSON strings correctly: quotes, backslashes, newlines, tabs, and Unicode." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    Escape JSON strings
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>How to escape strings in JSON</h1>
+    <p class="muted">JSON strings must be wrapped in double quotes, and certain characters must be escaped.</p>
+
+    <h2>Characters that commonly need escaping</h2>
+    <ul>
+      <li><strong>Double quote</strong>: <code>\"</code></li>
+      <li><strong>Backslash</strong>: <code>\\</code></li>
+      <li><strong>Newline</strong>: <code>\n</code></li>
+      <li><strong>Tab</strong>: <code>\t</code></li>
+      <li><strong>Carriage return</strong>: <code>\r</code></li>
+    </ul>
+
+    <h2>Example</h2>
+    <pre><code>{
+  "message": "Line1\nLine2",
+  "path": "C:\\\\temp\\\\file.txt",
+  "quote": "She said: \"hello\""
+}</code></pre>
+
+    <h2>Common mistakes</h2>
+    <ul>
+      <li>Using single quotes: <code>{'a':'b'}</code> is not valid JSON.</li>
+      <li>Forgetting to escape backslashes in Windows paths.</li>
+      <li>Copying multi-line text into a JSON string without converting line breaks to <code>\n</code>.</li>
+    </ul>
+
+    <p>If your JSON won’t format, start here: <a href="/guides/validate-json.html">Validate JSON</a>.</p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

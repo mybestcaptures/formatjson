@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compare Two JSON Files | formatjson.com</title>
+  <meta name="description" content="Learn how to compare JSON files: format first, sort keys, and use diff navigation to review changes quickly." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    Compare JSON
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>How to compare two JSON files (clean diffs)</h1>
+    <p class="muted">A good diff is about reducing noise so you can focus on real changes.</p>
+
+    <h2>Step 1: Format both JSON inputs</h2>
+    <p>Formatting normalizes indentation and line breaks, which makes diffs easier to read.</p>
+
+    <h2>Step 2: Sort keys (when order doesn’t matter)</h2>
+    <p>If the JSON objects are semantically the same but key order differs, sorting can produce a much cleaner diff.</p>
+    <p><strong>Tip:</strong> Don’t sort arrays if element order is meaningful (for example event lists or ordered steps).</p>
+
+    <h2>Step 3: Load the diff and use navigation</h2>
+    <p>Click <strong>Load Diff</strong>, then use <strong>Next Change</strong> and <strong>Previous Change</strong> to jump between edits.</p>
+
+    <h2>Common pitfalls</h2>
+    <ul>
+      <li><strong>Whitespace changes</strong>: format first.</li>
+      <li><strong>Timestamps/IDs</strong>: consider removing volatile fields before diffing.</li>
+      <li><strong>Numbers vs strings</strong>: <code>"1"</code> is not the same as <code>1</code>.</li>
+    </ul>
+
+    <p>Related: <a href="/guides/validate-json.html">Validate JSON</a> · <a href="/guides/jsonpath-examples.html">JSONPath examples</a></p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

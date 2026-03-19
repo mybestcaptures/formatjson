@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON Privacy & Safety Tips | formatjson.com</title>
+  <meta name="description" content="Practical privacy tips when formatting JSON: remove secrets, sanitize logs, and avoid sharing sensitive data." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    Privacy & safety
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>Privacy & safety when working with JSON</h1>
+    <p class="muted">JSON payloads often contain sensitive data. These tips help you avoid accidental leaks when debugging or sharing examples.</p>
+
+    <h2>What to remove before sharing</h2>
+    <ul>
+      <li><strong>API keys</strong>, tokens, session IDs, cookies</li>
+      <li><strong>Passwords</strong> and secrets</li>
+      <li><strong>Personal data</strong>: emails, phone numbers, addresses, names, device identifiers</li>
+      <li><strong>Internal URLs</strong> and hostnames</li>
+    </ul>
+
+    <h2>How to sanitize examples</h2>
+    <ul>
+      <li>Replace real values with placeholders like <code>"REDACTED"</code></li>
+      <li>Keep the shape: preserve keys and types so debugging stays accurate</li>
+      <li>Use short examples: include only the minimal fields needed to reproduce</li>
+    </ul>
+
+    <h2>Be careful with logs</h2>
+    <p>Application logs often capture full request/response bodies. Treat logs as sensitive and avoid pasting raw production data into public places.</p>
+
+    <p>Related: <a href="/privacy.html">Privacy policy</a> · <a href="/guides/escape-json.html">Escape JSON strings</a></p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

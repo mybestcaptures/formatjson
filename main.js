@@ -401,16 +401,18 @@ function openFile2(){
       var FOOTER_HEIGHT = 10
       var TABS_HEIGHT = 20 + 2 + 2
       var INNER_PADDING = 0
-
-      var HALF_WIDTH = Math.floor((WIDTH - INNER_PADDING) / 2)
+      var isNarrow = window.innerWidth <= 950
+      var HALF_WIDTH = isNarrow ? WIDTH : Math.floor((WIDTH - INNER_PADDING) / 2)
       var REMAINING_HEIGHT = HEIGHT - TITLE_HEIGHT - FOOTER_HEIGHT - TABS_HEIGHT - FOOTER_HEIGHT
+      var MIN_EDITOR_HEIGHT = 260
+      var STACKED_EDITOR_HEIGHT = Math.max(MIN_EDITOR_HEIGHT, Math.floor((REMAINING_HEIGHT - 12) / 2))
 
       document.getElementById('editor1').style.width = HALF_WIDTH + 'px'
       document.getElementById('editor2').style.width = HALF_WIDTH + 'px'
       document.getElementById('diff-editor').style.width = WIDTH + 'px'
 
-      document.getElementById('editor1').style.height = REMAINING_HEIGHT + 'px'
-      document.getElementById('editor2').style.height = REMAINING_HEIGHT + 'px'
+      document.getElementById('editor1').style.height = (isNarrow ? STACKED_EDITOR_HEIGHT : REMAINING_HEIGHT) + 'px'
+      document.getElementById('editor2').style.height = (isNarrow ? STACKED_EDITOR_HEIGHT : REMAINING_HEIGHT) + 'px'
       document.getElementById('diff-editor').style.height = REMAINING_HEIGHT + 'px'
       document.getElementsByClassName('other-format-div')[0].style.width = WIDTH + 'px'
 
@@ -423,13 +425,13 @@ function openFile2(){
       if (editor1) {
           editor1.layout({
               width: HALF_WIDTH,
-              height: REMAINING_HEIGHT
+              height: isNarrow ? STACKED_EDITOR_HEIGHT : REMAINING_HEIGHT
           })
       }
       if (editor2) {
           editor2.layout({
               width: HALF_WIDTH,
-              height: REMAINING_HEIGHT
+              height: isNarrow ? STACKED_EDITOR_HEIGHT : REMAINING_HEIGHT
           })
       }
   }

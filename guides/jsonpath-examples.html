@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSONPath Examples | formatjson.com</title>
+  <meta name="description" content="Practical JSONPath examples for nested objects and arrays. Learn how to reference fields inside JSON quickly." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    JSONPath examples
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>JSONPath examples</h1>
+    <p class="muted">JSONPath is a way to describe “where” a value lives inside JSON. Different tools have slightly different JSONPath dialects; these examples use common patterns.</p>
+
+    <h2>Sample JSON</h2>
+    <pre><code>{
+  "user": {
+    "id": 42,
+    "name": "Asha",
+    "emails": ["a@example.com", "asha@work.com"],
+    "address": { "city": "Austin", "zip": "78701" }
+  },
+  "orders": [
+    { "id": "o1", "total": 10.5 },
+    { "id": "o2", "total": 25.0 }
+  ]
+}</code></pre>
+
+    <h2>Common paths</h2>
+    <ul>
+      <li><strong>Root</strong>: <code>$</code></li>
+      <li><strong>Nested field</strong>: <code>$.user.name</code></li>
+      <li><strong>Array item</strong>: <code>$.orders[0].id</code></li>
+      <li><strong>Array length (tool-dependent)</strong>: often computed by the tool rather than JSONPath itself</li>
+      <li><strong>All items (tool-dependent)</strong>: <code>$.orders[*].total</code></li>
+    </ul>
+
+    <h2>How to use JSONPath on FormatJSON</h2>
+    <p>Paste JSON into “JSON One” and click <strong>Json Path</strong>. The tool generates a path-like mapping for keys and nested structures to help you locate values quickly.</p>
+
+    <p>Related: <a href="/guides/validate-json.html">Validate JSON</a> · <a href="/guides/compare-json.html">Compare JSON</a></p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API JSON Best Practices (Design & Consistency) | formatjson.com</title>
+  <meta name="description" content="Best practices for designing JSON in APIs: naming, casing, nulls, pagination, errors, and versioning." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    API JSON best practices
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>API JSON best practices</h1>
+    <p class="muted">Consistent JSON makes APIs easier to use, document, and debug. Here are practices that improve developer experience.</p>
+
+    <h2>1) Choose a naming convention and stick to it</h2>
+    <ul>
+      <li><strong>camelCase</strong> is common in JavaScript ecosystems</li>
+      <li><strong>snake_case</strong> is common in Python/Ruby ecosystems</li>
+    </ul>
+    <p>Mixing styles inside the same API is a frequent source of bugs.</p>
+
+    <h2>2) Be intentional with null vs missing</h2>
+    <ul>
+      <li><strong>Missing</strong> often means “not applicable” or “not provided”</li>
+      <li><strong>null</strong> often means “known to be empty”</li>
+    </ul>
+
+    <h2>3) Use stable IDs and explicit types</h2>
+    <p>IDs are commonly strings even if they look numeric (to avoid precision and formatting issues across systems).</p>
+
+    <h2>4) Pagination should be predictable</h2>
+    <p>Common patterns include:</p>
+    <pre><code>{
+  "items": [/* ... */],
+  "nextCursor": "abc123"
+}</code></pre>
+
+    <h2>5) Standardize error shapes</h2>
+    <p>Clients should branch on stable error codes. See: <a href="/guides/api-error-payloads.html">API error payload patterns</a>.</p>
+
+    <h2>6) Version carefully</h2>
+    <ul>
+      <li>Avoid breaking changes when possible</li>
+      <li>If you must break, version explicitly (URL, header, or media type)</li>
+    </ul>
+
+    <p>Related: <a href="/guides/json-schema-basics.html">JSON Schema basics</a> · <a href="/guides/validate-json.html">Validate JSON</a></p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

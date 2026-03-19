@@ -4,6 +4,11 @@
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9125864051733623"
      crossorigin="anonymous"></script>
 
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+
         <script type="application/ld+json">
             {
               "@context": "https://schema.org",
@@ -19,25 +24,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="description" content="JSON :: Format JSON helps to format and validate json data. JSON formatter also provides tree view which helps to navigate through your JSON data. Welcome to FormatJSON, the ultimate JSON formatting tool that provides a fast, efficient, and secure way to format your JSON data. Our goal is to create a user-friendly and reliable tool that is accessible to everyone, regardless of technical knowledge or internet connection.
-            At FormatJSON, we believe in protecting the privacy and security of our users. That's why our tool is designed to be completely offline, ensuring that no data is saved or shared with anyone. Our tool is 100% client-side, meaning that all data remains on your device and is never transmitted to a server or saved in the cloud.
-            With FormatJSON, you can easily format your JSON data without the need for an internet connection. Simply load the page and you're ready to go. Our user-friendly interface allows you to quickly and easily format your JSON data into a readable and well-structured format. Whether you're a developer working with large amounts of data, or someone who simply wants to view JSON data in a more organized format, FormatJSON has got you covered.
-            We take pride in our commitment to providing users with a high-quality and reliable service. Our team is dedicated to continually improving our tool to ensure that it meets the needs of our users. We welcome feedback and suggestions, and are always looking for ways to make our tool even better.
-            Try FormatJSON today and see why it's the ultimate JSON formatting tool. With its fast, efficient, and secure features, you won't be disappointed. Whether you're working offline or online, FormatJSON is the perfect tool to help you quickly and easily format your JSON data.">
+        <meta name="description" content="Format, validate, minify, sort, and compare JSON directly in your browser. Free JSON formatter with diff view and practical guides." />
         <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-        <meta name="keywords" content="json, json viewer, json editor, format json, json formatter, json beautifier, validate json, compare json, sort json, download json,  json path, minify json, remove spaces from json, copy json, format JSON, validate JSON, beautify JSON, minify JSON, compare JSON, JSON editor, sort JSON, JSON online tool, JSON formatter, JSON diff">
         <title>FormatJSON: edit JSON, Validate, Compare & Edit JSON Online, JSON Editor Online, format JSON</title>
         <meta name="robots" content="index, follow">
         <link rel="canonical" href="https://www.formatjson.com" />
-        <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/js/all.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>
-        $(document).ready(function(){
-        if($(window).width() <= 950) {
-            window.location = "https://www.formatjson.com/onefile/";
-        }
-        });
-    </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/js/all.js"></script>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="style.css">
     </head>
@@ -46,6 +38,7 @@
         <div class="fullbleed-wrap">
             <div class="other-format-div">
                 <a href="/faq/" class="other-format"> <i class="far fa-code"></i> FAQ</a>
+                <a href="/guides/" class="other-format"> <i class="far fa-bookmark"></i> Guides</a>
                 <a href="/user-agent/" class="other-format"> <i class="far fa-code"></i> Parse User Agent</a>
                 <a href="/base64" class="other-format"> <i class="far fa-angle-double-down"></i> Base 64 Decoder</a>
                 <a href="/uuid" class="other-format"> <i class="far fa-globe"></i> UUID Generator</a>
@@ -59,7 +52,7 @@
         <div class="main">
             <div class="editor-group">
             <span class="editor-title">JSON One</span>
-            <div id="toolbar">
+            <div class="toolbar">
                 <button id="format-edit-1"><i class="fas fa-stream"></i> Format</button>
                 <button id="minify-1"><i class="fas fa-microscope"></i> Minify </button>
                 <button id="paste-1"><i class="fas fa-paste"></i> Paste Over</button>
@@ -78,7 +71,7 @@
         
             <div class="editor-group">
                 <span class="editor-title">JSON Two</span>
-                <div id="toolbar">
+                <div class="toolbar">
                     <button id="format-edit-2"><i class="fas fa-stream"></i> Format</button>
                     <button id="minify-2"><i class="fas fa-microscope"></i> Minify </button>
                     <button id="paste-2"><i class="fas fa-paste"></i> Paste Over</button>
@@ -115,24 +108,49 @@
             You can copy JSON files to clipboard.
         </div>
 
-        <div class="formatJson_box">
-            <p> Format json, JSON format, JSON Formatter
-                JSON Viewer, JSON Editor Online, Best JSON Viewer, Free Online JSON Formatter,
-                JSON Validator, JSON file format, Format JSON file,
-                JSON View, Jedit, Online JSON Formatter,
-                JSON Editor, JSON compare, compare JSON, JSON diff, Json data format,
-                JSON string format, Compare two JSON files,
-                JSON sort, Sort JSON alphabetically, Sort JSON,
-                JSON path, get location of each key in JSON, get JSON Path,
-                Download JSON, download Json files,
-                Copy JSON files to clipboard.
+        <div class="homepage-content">
+          <div class="homepage-card">
+            <h2>How to use the JSON formatter</h2>
+            <ol>
+              <li>Paste JSON into <strong>JSON One</strong> (or <strong>JSON Two</strong>).</li>
+              <li>Click <strong>Format</strong> to pretty print, or <strong>Minify</strong> for compact JSON.</li>
+              <li>Use <strong>Sort</strong> to alphabetize object keys, or <strong>Load Diff</strong> to compare.</li>
+            </ol>
+            <p>
+              On mobile, try the simpler editor at <a href="/onefile/">/onefile/</a>.
             </p>
+          </div>
+
+          <div class="homepage-card">
+            <h2>Example: pretty print vs minify</h2>
+            <pre><code>{"user":{"id":42,"name":"Asha","active":true},"roles":["admin","editor"]}</code></pre>
+            <p>After formatting:</p>
+            <pre><code>{
+  "user": {
+    "id": 42,
+    "name": "Asha",
+    "active": true
+  },
+  "roles": [
+    "admin",
+    "editor"
+  ]
+}</code></pre>
+          </div>
+
+          <div class="homepage-card">
+            <h2>Guides and help</h2>
+            <ul>
+              <li><a href="/faq/">FAQ</a></li>
+              <li><a href="/guides/validate-json.html">Validate JSON (common errors & fixes)</a></li>
+              <li><a href="/guides/compare-json.html">Compare two JSON files</a></li>
+              <li><a href="/guides/jsonpath-examples.html">JSONPath examples</a></li>
+            </ul>
+          </div>
         </div>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"></script>
-        <script src="main.js"></script>
+        <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"></script>
+        <script defer src="main.js"></script>
           <!-- add content -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9125864051733623"
-     crossorigin="anonymous"></script>
 <!-- mainPage -->
 <ins class="adsbygoogle"
      style="display:block"

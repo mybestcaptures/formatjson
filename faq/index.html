@@ -1,89 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        .faq {
-            margin: 30px;
-        }
-        .faq h1 {
-            text-align: center;
-            font-size: 25px;
-            margin-top: 20px;
-            color: #007bff;
-        }
-        .faq h2 {
-            font-size: 18px;
-            margin-top: 5px;
-            color: #007bff;
-        }
-        .faq p {
-            font-size: 14px;
-            margin-top: 0px;
-            margin-left: 15px ;
-            color: #007bff;
-        }
-
-        .fullbleed-wrap {
-            padding-top: 20px;
-            padding-bottom: 20px;
-            background-color: #1165ed;
-        }
-        .other-format-div {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            z-index: 5;
-        }
-        .other-format {
-            color: white;
-            float: right;
-            font-weight: bolder;
-            z-index: 5;
-            padding-right: 20px;
-            text-decoration: none;
-            transition: color .15s ease-in-out;
-        }
-
-        .other-format:hover {
-            color: black;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ | formatjson.com</title>
+    <link rel="stylesheet" href="/content.css" />
 </head>
 <body>
-<div class="fullbleed-wrap">
-    <div class="other-format-div">
-        <a href="/about" class="other-format"> <i class="far fa-code"></i> About Us</a>
-        <a href="https://www.formatjson.com" class="other-format"> <i class="far fa-circle"></i> Format JSON</a>
+  <header>
+    FAQ
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/onefile/">Mobile editor</a>
+      <a href="/guides/">Guides</a>
+      <a href="/about.html">About</a>
+      <a href="/contactUs.html">Contact</a>
     </div>
+  </header>
 
-    </div>
-
-<div class="faq">
+  <div class="card">
     <h1>Frequently Asked Questions</h1>
-    <h2>What is Format JSON?</h2>
-    <p>Format JSON is a free online tool for formatting and validating JSON data.</p>
-    <h2>How do I use Format JSON?</h2>
-    <p>To use Format JSON, simply copy and paste your JSON data into the text box, and click the "Format" button. The formatted JSON data will be displayed in the output box below.</p>
-    <h2>What if my JSON data is invalid?</h2>
-    <p>If your JSON data is invalid, an error message will be displayed in the output box, indicating the type of error and the location in the JSON data where it occurred.</p>
-    <h2>Is my data secure?</h2>
-    <p>Yes, your data is secure. We do not store or share your data with any third parties.</p>
-    <h2>Is Format JSON free to use?</h2>
-    <p>Yes, Format JSON is completely free to use.</p>
-    <h2>Do you offer support?</h2>
-    <p>Yes, we offer support via email. Please send your questions or feedback to support@formatjson.com, and we will respond as soon as possible.</p>
-    <h2> Does FormatJSON require an internet connection?</h2>
-    <p>No, FormatJSON does not require an internet connection. Once the page is loaded, you can use the tool offline. This makes FormatJSON a convenient tool for developers and others who need to format JSON data on-the-go.</p>
-    <h2>Does FormatJSON save or share any data?</h2>
-    <p>No, FormatJSON does not save or share any data. Our tool is 100% client-side, meaning that all data remains on your device and is never transmitted to a server or saved in the cloud. This ensures the privacy and security of our users.</p>
-    <h2>Can I use FormatJSON for large amounts of data?</h2>
-    <p>Yes, FormatJSON is designed to handle large amounts of data. Our tool is optimized for performance, so you can quickly and easily format even the largest JSON datasets.</p>
-    <h2>Is FormatJSON accessible on all devices?</h2>
-    <p>Yes, FormatJSON is accessible on all devices, including desktop computers, laptops, tablets, and smartphones. Our tool is designed to be user-friendly and accessible, so you can use it wherever you are, whenever you need it.</p>
-<h2>We hope this FAQ has helped answer any questions you may have about FormatJSON. If you have any other questions, please don't hesitate to contact us.</h2>
+    <p class="muted">Practical answers for formatting, validating, comparing, and working with JSON safely.</p>
 
-</div>
-<div class="fullbleed-wrap">
+    <h2>What is FormatJSON?</h2>
+    <p>FormatJSON is a client-side JSON formatter and editor. It can format (pretty print), minify, sort keys, generate JSONPath output, and compare two JSON inputs.</p>
 
-</div>
+    <h2>Is my JSON uploaded to a server?</h2>
+    <p>The formatter and editor run in your browser. Your JSON is processed on your device. Pages may still load third‑party resources (for example ads and icons) like most websites.</p>
+
+    <h2>How do I format (pretty print) JSON?</h2>
+    <p>Paste JSON into the editor and click <strong>Format</strong>. If the JSON is valid, it will reformat with consistent indentation.</p>
+
+    <h2>How do I minify JSON?</h2>
+    <p>Click <strong>Minify</strong> to remove whitespace and line breaks. This is helpful when you want a compact payload for a request or storage.</p>
+
+    <h2>What does “invalid JSON” usually mean?</h2>
+    <p>Most errors are caused by one of these:</p>
+    <ul>
+      <li>Trailing comma: <code>{"a":1,}</code></li>
+      <li>Single quotes instead of double quotes: <code>{'a':1}</code></li>
+      <li>Unquoted keys: <code>{a:1}</code></li>
+      <li>Comments (JSON doesn’t allow comments by default)</li>
+    </ul>
+
+    <h2>Can I format very large JSON?</h2>
+    <p>Yes, but browser memory and performance are the limiting factors. If the page feels slow, try the <a href="/onefile/">mobile editor</a> or split the JSON into smaller parts.</p>
+
+    <h2>Why does “Paste Over” not show on my device?</h2>
+    <p>Some browsers restrict clipboard access. If clipboard APIs aren’t available, the paste button is hidden.</p>
+
+    <h2>What does “Sort” do?</h2>
+    <p>It sorts object keys alphabetically (case-insensitive). Arrays are kept in their original order unless they contain sortable primitives.</p>
+
+    <h2>What is JSONPath and why is it useful?</h2>
+    <p>JSONPath is a way to refer to a location inside JSON (similar to XPath for XML). It’s useful for debugging APIs and extracting values from nested objects.</p>
+    <p>See examples in <a href="/guides/jsonpath-examples.html">JSONPath examples</a>.</p>
+
+    <h2>How do I compare two JSON files?</h2>
+    <p>Paste JSON into “JSON One” and “JSON Two”, then click <strong>Load Diff</strong>. The diff view highlights additions, removals, and changes.</p>
+    <p>See tips in <a href="/guides/compare-json.html">Compare JSON guide</a>.</p>
+
+    <h2>Do you support JSON5 / relaxed JSON?</h2>
+    <p>This tool focuses on standard JSON (RFC 8259). If your input includes comments, trailing commas, or single quotes, convert it to valid JSON first.</p>
+
+    <h2>Can I format JSON offline?</h2>
+    <p>Once the page assets are loaded, the formatter/editor logic runs locally. Offline behavior depends on your browser caching and whether third-party resources are required for the UI you’re using.</p>
+
+    <h2>Where can I report a bug or request a feature?</h2>
+    <p>Please contact <a href="/contactUs.html">support</a> with a short repro example (sanitize any sensitive data).</p>
+  </div>
+
+  <footer>
+    <a href="/privacy.html">Privacy</a> · <a href="/termsAndConditions.html">Terms</a> · <a href="/about.html">About</a>
+  </footer>
 </body>
 </html>

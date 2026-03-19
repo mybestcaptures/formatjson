@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Error JSON Payload Patterns | formatjson.com</title>
+  <meta name="description" content="Common JSON error response patterns for APIs: error codes, messages, field-level validation, and trace IDs." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    API error payloads
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>Common JSON error response patterns (and why they help)</h1>
+    <p class="muted">A consistent error shape makes it easier for clients to show good messages, retry safely, and debug issues.</p>
+
+    <h2>1) Simple error object</h2>
+    <pre><code>{
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Missing or invalid token"
+  }
+}</code></pre>
+
+    <h2>2) Include a request / trace ID</h2>
+    <p>Trace IDs let support and SRE teams find the exact server-side logs.</p>
+    <pre><code>{
+  "error": {
+    "code": "INTERNAL",
+    "message": "Unexpected error"
+  },
+  "traceId": "b4f8f8e7d7d44b1a"
+}</code></pre>
+
+    <h2>3) Field-level validation errors</h2>
+    <p>Great for forms and API clients:</p>
+    <pre><code>{
+  "error": {
+    "code": "VALIDATION_FAILED",
+    "message": "Some fields are invalid",
+    "details": [
+      {"field": "email", "issue": "invalid_format"},
+      {"field": "age", "issue": "must_be_greater_than_or_equal_to_18"}
+    ]
+  }
+}</code></pre>
+
+    <h2>Best practices</h2>
+    <ul>
+      <li><strong>Don’t leak secrets</strong>: avoid stack traces and internal hostnames in production responses.</li>
+      <li><strong>Keep codes stable</strong>: clients should branch on <code>code</code>, not free-text messages.</li>
+      <li><strong>Normalize casing</strong>: choose snake_case or camelCase and stick to it.</li>
+    </ul>
+
+    <p>Related: <a href="/guides/privacy-and-safety.html">Privacy & safety</a> · <a href="/guides/escape-json.html">Escape JSON strings</a></p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

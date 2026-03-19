@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Handle Large JSON (Performance Tips) | formatjson.com</title>
+  <meta name="description" content="Tips for formatting and working with large JSON in a browser: reduce size, split data, remove noise, and compare safely." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    Large JSON tips
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>Working with large JSON in the browser</h1>
+    <p class="muted">Very large JSON can be slow to parse and render. Here are practical ways to make it manageable.</p>
+
+    <h2>1) Minify or compress before moving it around</h2>
+    <p>Minifying reduces bytes (good for transport). Compression (gzip/brotli) reduces bytes even more if your server supports it.</p>
+
+    <h2>2) Remove “noisy” fields before diffing</h2>
+    <p>Timestamps, random IDs, and request metadata can overwhelm diffs. If possible, remove or normalize these fields before comparing.</p>
+
+    <h2>3) Split JSON into smaller pieces</h2>
+    <p>If the payload contains large arrays (for example events), split it by chunks so you can isolate the part you need.</p>
+
+    <h2>4) Sort keys for cleaner comparisons</h2>
+    <p>When order doesn’t matter, sorting keys can make diffs more readable. See: <a href="/guides/sort-json-keys.html">Sort JSON keys</a>.</p>
+
+    <h2>5) Use the simpler mobile editor on phones</h2>
+    <p>On mobile devices, try <a href="/onefile/">/onefile/</a> which is designed for smaller screens.</p>
+
+    <p>Related: <a href="/guides/compare-json.html">Compare JSON</a> · <a href="/guides/minify-json.html">Minify JSON</a></p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+

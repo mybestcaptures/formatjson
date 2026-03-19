@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validate JSON (Common Errors & Fixes) | formatjson.com</title>
+  <meta name="description" content="Learn how to validate JSON and fix common errors like trailing commas, single quotes, and unquoted keys." />
+  <link rel="stylesheet" href="/content.css" />
+</head>
+<body>
+  <header>
+    Validate JSON
+    <div class="subnav">
+      <a href="/">Formatter</a>
+      <a href="/guides/">Guides</a>
+      <a href="/faq/">FAQ</a>
+    </div>
+  </header>
+
+  <div class="card">
+    <h1>How to validate JSON (and fix common errors)</h1>
+    <p class="muted">If your formatter says “invalid JSON”, it usually means the input isn’t strict JSON. Here’s how to spot and fix the most common issues.</p>
+
+    <h2>1) Make sure keys and strings use double quotes</h2>
+    <p>In JSON, both keys and string values must use double quotes.</p>
+    <pre><code>// ❌ Not JSON
+{a: 'hello'}
+
+// ✅ Valid JSON
+{"a": "hello"}</code></pre>
+
+    <h2>2) Remove trailing commas</h2>
+    <p>Trailing commas are common when copying from languages like JavaScript.</p>
+    <pre><code>// ❌ Not JSON
+{"a": 1,}
+
+// ✅ Valid JSON
+{"a": 1}</code></pre>
+
+    <h2>3) JSON doesn’t allow comments</h2>
+    <pre><code>// ❌ Not JSON
+{
+  // comment
+  "a": 1
+}
+
+// ✅ Valid JSON
+{
+  "a": 1
+}</code></pre>
+
+    <h2>4) Watch for special values: NaN, Infinity, undefined</h2>
+    <p>JSON supports <code>null</code>, <code>true</code>, <code>false</code>, numbers, strings, arrays, and objects. Values like <code>undefined</code> are not valid JSON.</p>
+
+    <h2>5) If you’re comparing JSON, format first to reduce noise</h2>
+    <p>Different whitespace/indentation makes diffs noisy. Format both JSON inputs first, then compare.</p>
+    <p>Next: <a href="/guides/compare-json.html">How to compare two JSON files</a>.</p>
+  </div>
+
+  <footer>
+    <a href="/guides/">All guides</a> · <a href="/privacy.html">Privacy</a> · <a href="/contactUs.html">Contact</a>
+  </footer>
+</body>
+</html>
+
