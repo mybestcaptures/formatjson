@@ -1,4 +1,5 @@
-FormatJSON
+**FormatJSON**
+
 FormatJSON is an online tool for formatting and beautifying JSON data. It's an easy to use and flexible platform for developers, testers, and anyone who needs to work with JSON data.
 Features
 	•	User-friendly interface for easy formatting of JSON data
