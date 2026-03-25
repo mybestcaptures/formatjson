@@ -230,3 +230,91 @@ button:hover {
     margin-left: 0;
   }
 }
+
+/* Saved JSON Modal */
+.sjm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sjm-dialog {
+  background: #fff;
+  border-radius: 10px;
+  width: 520px;
+  max-width: 94vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0,0,0,.2);
+}
+.sjm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.sjm-header h3 {
+  margin: 0;
+  font-size: 17px;
+}
+.sjm-close {
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  min-height: auto;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+.sjm-close:hover {
+  color: #d00;
+  background: #fce4e4;
+}
+.sjm-body {
+  padding: 12px 18px 16px;
+  overflow-y: auto;
+}
+.sjm-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.sjm-item:last-child {
+  border-bottom: none;
+}
+.sjm-item-name {
+  flex: 1;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sjm-item-date {
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+}
+.sjm-item button {
+  font-size: 11px;
+  padding: 3px 8px;
+  min-height: auto;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.sjm-item .sjm-delete {
+  color: #d00;
+  border-color: #d00;
+}
+.sjm-item .sjm-delete:hover {
+  background: #d00;
+  color: #fff;
+}

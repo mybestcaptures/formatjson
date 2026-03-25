@@ -438,4 +438,163 @@ function openFile2(){
 
   layout()
   window.onresize = layout
+
+  // ── IndexedDB: Save / Load / Delete JSON snippets ──
+
+  var DB_NAME = 'formatjson_db'
+  var STORE_NAME = 'saved_json'
+  var DB_VERSION = 1
+
+  function openDB() {
+    return new Promise(function(resolve, reject) {
+      var request = indexedDB.open(DB_NAME, DB_VERSION)
+      request.onupgradeneeded = function(e) {
+        var db = e.target.result
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+          db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true })
+        }
+      }
+      request.onsuccess = function(e) { resolve(e.target.result) }
+      request.onerror = function(e) { reject(e.target.error) }
+    })
+  }
+
+  function saveJsonToDB(name, jsonString) {
+    return openDB().then(function(db) {
+      return new Promise(function(resolve, reject) {
+        var tx = db.transaction(STORE_NAME, 'readwrite')
+        tx.objectStore(STORE_NAME).add({
+          name: name,
+          json: jsonString,
+          timestamp: new Date().toISOString()
+        })
+        tx.oncomplete = function() { resolve() }
+        tx.onerror = function(e) { reject(e.target.error) }
+      })
+    })
+  }
+
+  function getAllSavedJson() {
+    return openDB().then(function(db) {
+      return new Promise(function(resolve, reject) {
+        var tx = db.transaction(STORE_NAME, 'readonly')
+        var request = tx.objectStore(STORE_NAME).getAll()
+        request.onsuccess = function() { resolve(request.result) }
+        request.onerror = function(e) { reject(e.target.error) }
+      })
+    })
+  }
+
+  function deleteJsonFromDB(id) {
+    return openDB().then(function(db) {
+      return new Promise(function(resolve, reject) {
+        var tx = db.transaction(STORE_NAME, 'readwrite')
+        tx.objectStore(STORE_NAME).delete(id)
+        tx.oncomplete = function() { resolve() }
+        tx.onerror = function(e) { reject(e.target.error) }
+      })
+    })
+  }
+
+  // ── Modal helpers ──
+
+  var modal = document.getElementById('saved-json-modal')
+  var sjmList = document.getElementById('sjm-list')
+  var sjmEmpty = document.getElementById('sjm-empty')
+  var pendingLoadEditor = null // which editor to load into
+
+  function openModal(editorNumber) {
+    pendingLoadEditor = editorNumber
+    renderSavedList()
+    modal.style.display = 'flex'
+  }
+
+  function closeModal() {
+    modal.style.display = 'none'
+    pendingLoadEditor = null
+  }
+
+  document.getElementById('sjm-close').addEventListener('click', closeModal)
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal()
+  })
+
+  function renderSavedList() {
+    getAllSavedJson().then(function(items) {
+      sjmList.innerHTML = ''
+      if (items.length === 0) {
+        sjmEmpty.style.display = 'block'
+        return
+      }
+      sjmEmpty.style.display = 'none'
+      items.sort(function(a, b) { return b.id - a.id }) // newest first
+      items.forEach(function(item) {
+        var row = document.createElement('div')
+        row.className = 'sjm-item'
+
+        var nameSpan = document.createElement('span')
+        nameSpan.className = 'sjm-item-name'
+        nameSpan.textContent = item.name
+        nameSpan.title = item.name
+
+        var dateSpan = document.createElement('span')
+        dateSpan.className = 'sjm-item-date'
+        dateSpan.textContent = new Date(item.timestamp).toLocaleString()
+
+        var loadBtn1 = document.createElement('button')
+        loadBtn1.textContent = '→ Editor 1'
+        loadBtn1.addEventListener('click', function() {
+          updateAndFormatEditor(item.json, 1)
+          closeModal()
+        })
+
+        var loadBtn2 = document.createElement('button')
+        loadBtn2.textContent = '→ Editor 2'
+        loadBtn2.addEventListener('click', function() {
+          updateAndFormatEditor(item.json, 2)
+          closeModal()
+        })
+
+        var delBtn = document.createElement('button')
+        delBtn.className = 'sjm-delete'
+        delBtn.textContent = 'Delete'
+        delBtn.addEventListener('click', function() {
+          if (confirm('Delete "' + item.name + '"?')) {
+            deleteJsonFromDB(item.id).then(renderSavedList)
+          }
+        })
+
+        row.appendChild(nameSpan)
+        row.appendChild(dateSpan)
+        row.appendChild(loadBtn1)
+        row.appendChild(loadBtn2)
+        row.appendChild(delBtn)
+        sjmList.appendChild(row)
+      })
+    })
+  }
+
+  // ── Save buttons ──
+
+  function saveEditorJson(editorNumber) {
+    var content = editorNumber === 1 ? editor1.getValue() : editor2.getValue()
+    if (!content || !content.trim()) {
+      alert('Editor ' + editorNumber + ' is empty. Nothing to save.')
+      return
+    }
+    var name = prompt('Enter a name for this JSON snippet:', 'JSON ' + new Date().toLocaleString())
+    if (!name) return
+    saveJsonToDB(name, content).then(function() {
+      alert('Saved "' + name + '" successfully.')
+    })
+  }
+
+  document.getElementById('save-1').addEventListener('click', function() { saveEditorJson(1) })
+  document.getElementById('save-2').addEventListener('click', function() { saveEditorJson(2) })
+
+  // ── Load buttons ──
+
+  document.getElementById('load-1').addEventListener('click', function() { openModal(1) })
+  document.getElementById('load-2').addEventListener('click', function() { openModal(2) })
+
 });

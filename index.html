@@ -56,15 +56,17 @@
                 <button id="format-edit-1"><i class="fas fa-stream"></i> Format</button>
                 <button id="minify-1"><i class="fas fa-microscope"></i> Minify </button>
                 <button id="paste-1"><i class="fas fa-paste"></i> Paste Over</button>
-                <button id="clear-1"><i class="fas fa-trash-alt"></i> Clear </button>
                 <button id="sortJson-1"><i class="fa-solid fa-arrow-down-a-z"></i> Sort</button>
                 <button id="jsonPath"><i class="fa-solid fa-map-location-dot"></i> Json Path</button>
-                <button id="font-zoom-in" class="tooltip"><span class="tooltiptext">Larger</span><i class="fas fa-search-plus"></i></button>
-                <button id="font-zoom-reset" class="tooltip"><span class="tooltiptext">Reset</span><i class="fas fa-font"></i> </button>
-                <button id="font-zoom-out" class="tooltip"><span class="tooltiptext">Smaller</span><i class="fas fa-search-minus"></i> </button>
                 <button id="download-1" class="tooltip"><span class="tooltiptext">Download File</span><i class="fa-solid fa-download"></i></button>
                 <button id="copy-1" class="tooltip"><span class="tooltiptext">Copy</span><i class="fa-solid fa-copy"></i></button>
                 <button id="openFile-1" class="tooltip"><span class="tooltiptext">Open JSON File</span><i class="fa-solid fa-file"></i></button>
+                <button id="save-1" class="tooltip"><span class="tooltiptext">Save to Browser</span><i class="fa-solid fa-floppy-disk"></i></button>
+                <button id="load-1" class="tooltip"><span class="tooltiptext">Load from Saved</span><i class="fa-solid fa-folder-open"></i></button>
+                <button id="clear-1"><i class="fas fa-trash-alt"></i></button>
+                <button id="font-zoom-in" class="tooltip"><span class="tooltiptext">Larger</span><i class="fas fa-search-plus"></i></button>
+                <button id="font-zoom-reset" class="tooltip"><span class="tooltiptext">Reset</span><i class="fas fa-font"></i> </button>
+                <button id="font-zoom-out" class="tooltip"><span class="tooltiptext">Smaller</span><i class="fas fa-search-minus"></i> </button>
             </div>
             <div id="editor1" class="editor"></div>
         </div>
@@ -75,11 +77,13 @@
                     <button id="format-edit-2"><i class="fas fa-stream"></i> Format</button>
                     <button id="minify-2"><i class="fas fa-microscope"></i> Minify </button>
                     <button id="paste-2"><i class="fas fa-paste"></i> Paste Over</button>
-                    <button id="clear-2"><i class="fas fa-trash-alt"></i> Clear </button>
                     <button id="sortJson-2"><i class="fa-solid fa-arrow-down-a-z"></i> Sort</button>
                     <button id="download-2" class="tooltip"><span class="tooltiptext">Download File</span><i class="fa-solid fa-download"></i></button>
                     <button id="copy-2" class="tooltip"><span class="tooltiptext">Copy</span><i class="fa-solid fa-copy"></i></button>
                     <button id="openFile-2" class="tooltip"><span class="tooltiptext">Open JSON File</span><i class="fa-solid fa-file"></i></button>
+                    <button id="save-2" class="tooltip"><span class="tooltiptext">Save to Browser</span><i class="fa-solid fa-floppy-disk"></i></button>
+                    <button id="load-2" class="tooltip"><span class="tooltiptext">Load from Saved</span><i class="fa-solid fa-folder-open"></i></button>
+                    <button id="clear-2"><i class="fas fa-trash-alt"></i> Clear </button>
                     <button id="compare-json"> <a href="#compareJson" ><i class="fas fa-not-equal"></i> Load Diff </a></button>
                 </div>
                 <div id="editor2" class="editor"></div>
@@ -148,6 +152,20 @@
             </ul>
           </div>
         </div>
+        <!-- Saved JSON Modal -->
+        <div id="saved-json-modal" class="sjm-overlay" style="display:none">
+          <div class="sjm-dialog">
+            <div class="sjm-header">
+              <h3>Saved JSON Snippets</h3>
+              <button class="sjm-close" id="sjm-close">&times;</button>
+            </div>
+            <div class="sjm-body">
+              <div id="sjm-list"></div>
+              <p id="sjm-empty" style="display:none;color:#888;text-align:center">No saved JSON snippets yet.</p>
+            </div>
+          </div>
+        </div>
+
         <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"></script>
         <script defer src="main.js"></script>
           <!-- add content -->
