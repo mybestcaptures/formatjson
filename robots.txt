@@ -1,5 +1,2 @@
 User-agent: *
-Disallow: /api/
 Allow: /
-
-Sitemap: https://www.formatjson.com/sitemap.xml
